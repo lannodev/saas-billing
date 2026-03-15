@@ -64,7 +64,7 @@ class Subscription extends Model
         return $this->hasMany(Usage::class, 'subscription_id', 'id');
     }
 
-    public function driver(): hasOne
+    public function driver(): HasOne
     {
         return $this->hasOne(SubscriptionDriver::class);
     }

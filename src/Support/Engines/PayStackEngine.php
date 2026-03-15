@@ -189,7 +189,7 @@ class PayStackEngine implements Engine
         $hash = hash_hmac('sha512', $request->getContent(), config('subscription.credentials.paystack.secret'));
 
         // validate event do all at once to avoid timing attack
-        if(! $request->hasHeader('x-paystack-signature') && $request->header('x-paystack-signature') !== $hash) {
+        if (! $request->hasHeader('x-paystack-signature') && $request->header('x-paystack-signature') !== $hash) {
             Log::info('The webhook cannot be verified.');
 
             throw new SuspiciousOperationException('This request is counterfeit.', 401);
