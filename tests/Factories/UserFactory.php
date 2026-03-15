@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Factories;
 
 use Tests\Models\User;
@@ -14,7 +15,7 @@ class UserFactory extends TestbenchUserFactory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'id'   => $this->faker->uuid,

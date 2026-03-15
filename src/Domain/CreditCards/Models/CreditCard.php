@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\CreditCards\Models;
 
 use Carbon\Carbon;
@@ -34,7 +35,8 @@ class CreditCard extends Model
     ];
 
     protected $appends = [
-        'is_expired', 'is_before_expiration',
+        'is_expired',
+        'is_before_expiration',
     ];
 
     public $incrementing = false;
@@ -48,9 +50,7 @@ class CreditCard extends Model
 
     public function getIsBeforeExpirationAttribute(): bool
     {
-        $diffInDays = $this->expiration->diffInDays(now());
-
-        return $this->expiration->isfuture() && $diffInDays <= 30;
+        return $this->expiration->isFuture() && now()->diffInDays($this->expiration) <= 30;
     }
 
     protected static function newFactory(): CreditCardFactory
@@ -67,6 +67,6 @@ class CreditCard extends Model
     {
         parent::boot();
 
-        static::creating(fn ($card) => $card->id = Str::uuid());
+        static::creating(fn($card) => $card->id = Str::uuid());
     }
 }

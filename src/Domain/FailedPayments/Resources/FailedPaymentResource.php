@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\FailedPayments\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -23,8 +24,8 @@ class FailedPaymentResource extends JsonResource
                     'attempts'   => $this->attempts,
                     'source'     => $this->source,
                     'note'       => $this->note,
-                    'created_at' => $this->created_at->formatLocalized('%d. %b. %Y'),
-                    'updated_at' => $this->updated_at->formatLocalized('%d. %b. %Y'),
+                    'created_at' => $this->created_at->translatedFormat('d/m/Y'),
+                    'updated_at' => $this->updated_at->translatedFormat('d/m/Y'),
                 ],
             ],
         ];

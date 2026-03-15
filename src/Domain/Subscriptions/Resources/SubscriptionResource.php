@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Subscriptions\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,16 +25,16 @@ class SubscriptionResource extends JsonResource
                     'name'          => $this->name,
                     'status'        => $this->status,
                     'trial_ends_at' => $this->trial_ends_at,
-                    'updated_at'    => $this->updated_at->formatLocalized('%d. %b. %Y'),
-                    'created_at'    => $this->created_at->formatLocalized('%d. %b. %Y'),
+                    'updated_at'    => $this->updated_at->translatedFormat('d/m/Y'),
+                    'created_at'    => $this->created_at->translatedFormat('d/m/Y'),
                     'renews_at'     => $this->renews_at
-                        ? $this->renews_at->formatLocalized('%d. %b. %Y')
-                        : $this->created_at->addDays(28)->formatLocalized('%d. %b. %Y'),
-                    'ends_at'       => $this->ends_at?->formatLocalized('%d. %b. %Y'),
+                        ? $this->renews_at->translatedFormat('d/m/Y')
+                        : $this->created_at->addDays(28)->translatedFormat('d/m/Y'),
+                    'ends_at'       => $this->ends_at?->translatedFormat('d/m/Y'),
                 ],
                 'relationships' => [
                     'plan' => new PlanResource($this->plan),
-                    $this->mergeWhen($this->user && $this->user->settings, fn () => [
+                    $this->mergeWhen($this->user && $this->user->settings, fn() => [
                         'user' => [
                             'data' => [
                                 'id'         => $this->user->id,

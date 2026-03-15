@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\CreditCards\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -25,8 +26,8 @@ class CreditCardResource extends JsonResource
                     'isExpired'          => $this->is_expired,
                     'isBeforeExpiration' => $this->is_before_expiration,
                     'expiration'         => $this->expiration->formatLocalized('%b %Y'),
-                    'created_at'         => $this->created_at->formatLocalized('%d. %b. %Y'),
-                    'updated_at'         => $this->updated_at->formatLocalized('%d. %b. %Y'),
+                    'created_at'         => $this->created_at->translatedFormat('d/m/Y'),
+                    'updated_at'         => $this->updated_at->translatedFormat('d/m/Y'),
                 ],
             ],
         ];

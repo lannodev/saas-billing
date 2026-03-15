@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -43,8 +44,8 @@ class PlanResource extends JsonResource
             'amount'      => $this->amount,
             'features'    => $this->fixedFeatures->pluck('value', 'key'),
             'interval'    => $this->interval,
-            'created_at'  => $this->created_at->formatLocalized('%d. %b. %Y'),
-            'updated_at'  => $this->updated_at->formatLocalized('%d. %b. %Y'),
+            'created_at'  => $this->created_at->translatedFormat('d/m/Y'),
+            'updated_at'  => $this->updated_at->translatedFormat('d/m/Y'),
         ];
     }
 
@@ -59,14 +60,14 @@ class PlanResource extends JsonResource
             'interval'    => $this->interval,
             'description' => $this->description,
             'subscribers' => $this->subscriptions->count(),
-            'features'    => $this->meteredFeatures->mapWithKeys(fn ($price) => [
+            'features'    => $this->meteredFeatures->mapWithKeys(fn($price) => [
                 $price['key'] => [
                     'aggregate_strategy' => $price['aggregate_strategy'],
                     'tiers'              => $price['tiers'],
                 ],
             ]),
-            'created_at'  => $this->created_at->formatLocalized('%d. %b. %Y'),
-            'updated_at'  => $this->updated_at->formatLocalized('%d. %b. %Y'),
+            'created_at'  => $this->created_at->translatedFormat('d/m/Y'),
+            'updated_at'  => $this->updated_at->translatedFormat('d/m/Y'),
         ];
     }
 }
