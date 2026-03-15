@@ -6,7 +6,6 @@ build
 coverage
 docs
 phpunit.xml.dist
-psalm.xml
 testbench.yaml
 vendor
 node_modules
