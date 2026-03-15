@@ -1,6 +1,10 @@
 name: Check & fix styling
 
-on: [push]
+on:
+  push:
+
+permissions:
+  contents: write
 
 jobs:
   php-cs-fixer:
@@ -9,13 +13,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Run PHP CS Fixer
         uses: docker://oskarstark/php-cs-fixer-ga
         with:
-          args: --allow-risky=yes
+          args: --config=.php_cs.dist.php --allow-risky=yes
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Fix styling
