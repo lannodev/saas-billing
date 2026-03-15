@@ -1,5 +1,4 @@
 <?php
-
 namespace VueFileManager\Subscription\Domain\Plans\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -60,7 +59,7 @@ class PlanResource extends JsonResource
             'interval'    => $this->interval,
             'description' => $this->description,
             'subscribers' => $this->subscriptions->count(),
-            'features'    => $this->meteredFeatures->mapWithKeys(fn($price) => [
+            'features'    => $this->meteredFeatures->mapWithKeys(fn ($price) => [
                 $price['key'] => [
                     'aggregate_strategy' => $price['aggregate_strategy'],
                     'tiers'              => $price['tiers'],
