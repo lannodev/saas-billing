@@ -138,7 +138,6 @@ trait PayStackWebhooks
         // TODO: resolve conflict with ZAR/USD currency
         // Proceed as credit balance
         if (empty($plan) && $transactionDoesntExists) {
-
             $user->creditBalance(
                 credit: $request->input('data.amount') / 100,
                 currency: $request->input('data.currency'),
