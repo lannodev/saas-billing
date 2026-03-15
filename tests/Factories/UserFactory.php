@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Factories;
 
 use Tests\Models\User;

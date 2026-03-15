@@ -1,5 +1,4 @@
 <?php
-
 namespace VueFileManager\Subscription\Domain\Subscriptions\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -34,7 +33,7 @@ class SubscriptionResource extends JsonResource
                 ],
                 'relationships' => [
                     'plan' => new PlanResource($this->plan),
-                    $this->mergeWhen($this->user && $this->user->settings, fn() => [
+                    $this->mergeWhen($this->user && $this->user->settings, fn () => [
                         'user' => [
                             'data' => [
                                 'id'         => $this->user->id,

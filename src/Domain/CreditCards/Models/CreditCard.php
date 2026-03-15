@@ -1,5 +1,4 @@
 <?php
-
 namespace VueFileManager\Subscription\Domain\CreditCards\Models;
 
 use Carbon\Carbon;
@@ -67,6 +66,6 @@ class CreditCard extends Model
     {
         parent::boot();
 
-        static::creating(fn($card) => $card->id = Str::uuid());
+        static::creating(fn ($card) => $card->id = Str::uuid());
     }
 }
