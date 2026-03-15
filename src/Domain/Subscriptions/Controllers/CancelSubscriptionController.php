@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Subscriptions\Controllers;
 
 use Illuminate\Http\JsonResponse;

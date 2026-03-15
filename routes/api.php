@@ -1,27 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use VueFileManager\Subscription\Support\Webhooks\WebhooksController;
-use VueFileManager\Subscription\Domain\Plans\Controllers\PlansController;
-use VueFileManager\Subscription\Domain\Plans\Controllers\GetPlansController;
-use VueFileManager\Subscription\Domain\Plans\Actions\UpdatePlanFixedItemAction;
-use VueFileManager\Subscription\Domain\Plans\Controllers\SynchronizePlansController;
-use VueFileManager\Subscription\Domain\Plans\Controllers\GetPlanSubscribersController;
-use VueFileManager\Subscription\Domain\Credits\Controllers\CreditUserBalanceController;
 use VueFileManager\Subscription\Domain\BillingAlerts\Controllers\BillingAlertController;
-use VueFileManager\Subscription\Domain\Transactions\Controllers\GetTransactionsController;
-use VueFileManager\Subscription\Domain\Subscriptions\Controllers\GetSubscriptionController;
+use VueFileManager\Subscription\Domain\Credits\Controllers\CreditUserBalanceController;
+use VueFileManager\Subscription\Domain\Plans\Actions\UpdatePlanFixedItemAction;
+use VueFileManager\Subscription\Domain\Plans\Controllers\GetPlansController;
+use VueFileManager\Subscription\Domain\Plans\Controllers\GetPlanSubscribersController;
+use VueFileManager\Subscription\Domain\Plans\Controllers\PlansController;
+use VueFileManager\Subscription\Domain\Plans\Controllers\SynchronizePlansController;
+use VueFileManager\Subscription\Domain\Subscriptions\Controllers\CancelSubscriptionController;
 use VueFileManager\Subscription\Domain\Subscriptions\Controllers\EditSubscriptionController;
+use VueFileManager\Subscription\Domain\Subscriptions\Controllers\GetAllSubscriptionsController;
+use VueFileManager\Subscription\Domain\Subscriptions\Controllers\GetSubscriptionController;
+use VueFileManager\Subscription\Domain\Subscriptions\Controllers\GetUserSubscriptionController;
 use VueFileManager\Subscription\Domain\Subscriptions\Controllers\SwapSubscriptionController;
 use VueFileManager\Subscription\Domain\Transactions\Controllers\GetAllTransactionsController;
-use VueFileManager\Subscription\Domain\Subscriptions\Controllers\CancelSubscriptionController;
+use VueFileManager\Subscription\Domain\Transactions\Controllers\GetTransactionsController;
 use VueFileManager\Subscription\Domain\Transactions\Controllers\GetUserTransactionsController;
-use VueFileManager\Subscription\Domain\Subscriptions\Controllers\GetAllSubscriptionsController;
-use VueFileManager\Subscription\Domain\Subscriptions\Controllers\GetUserSubscriptionController;
-use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Controllers\CreateStripeSessionController;
-use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Controllers\DeleteStripeCreditCardController;
-use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Controllers\CreateStripeSetupIntentController;
 use VueFileManager\Subscription\Support\Miscellaneous\Paystack\Controllers\CreatePaystackTransactionController;
+use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Controllers\CreateStripeSessionController;
+use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Controllers\CreateStripeSetupIntentController;
+use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Controllers\DeleteStripeCreditCardController;
+use VueFileManager\Subscription\Support\Webhooks\WebhooksController;
 
 // System
 Route::group(['prefix' => 'api/subscriptions', 'middleware' => ['api']], function () {

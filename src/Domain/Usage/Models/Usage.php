@@ -1,16 +1,18 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Usage\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use VueFileManager\Subscription\Database\Factories\UsageFactory;
 use VueFileManager\Subscription\Domain\Plans\Models\PlanMeteredFeature;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
 
 /**
  * @method static create(array $array)
+ *
  * @property string metered_feature_id
  * @property string subscription_id
  * @property float quantity

@@ -1,8 +1,9 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Actions;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Plans\Resources\PlanResource;
@@ -35,7 +36,7 @@ class UpdatePlanFixedItemAction
                 ->fixedFeatures()
                 ->where('key', $key)
                 ->update([
-                    'key'   => $key,
+                    'key' => $key,
                     'value' => $value,
                 ]);
         }

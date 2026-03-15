@@ -1,10 +1,11 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Miscellaneous\Stripe\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class ConfirmStripePaymentNotification extends Notification implements ShouldQueue
 {
@@ -12,8 +13,7 @@ class ConfirmStripePaymentNotification extends Notification implements ShouldQue
 
     public function __construct(
         public array $payload
-    ) {
-    }
+    ) {}
 
     public function via(): array
     {

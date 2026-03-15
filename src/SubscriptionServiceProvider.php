@@ -1,19 +1,20 @@
 <?php
+
 namespace VueFileManager\Subscription;
 
-use Illuminate\Routing\Router;
-use Spatie\LaravelPackageTools\Package;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Validator;
+use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VueFileManager\Subscription\Support\EngineManager;
 use VueFileManager\Subscription\App\Console\Commands\SynchronizePlansCommand;
-use VueFileManager\Subscription\App\Scheduler\HaltExpiredSubscriptionsSchedule;
 use VueFileManager\Subscription\App\Scheduler\CheckAndTriggerBillingAlertsSchedule;
+use VueFileManager\Subscription\App\Scheduler\HaltExpiredSubscriptionsSchedule;
 use VueFileManager\Subscription\App\Scheduler\SettlePrePaidSubscriptionPeriodSchedule;
-use VueFileManager\Subscription\Domain\FailedPayments\Actions\RetryChargeFromPaymentCardAction;
-use VueFileManager\Subscription\Domain\DunningEmails\Actions\SendRepeatedDunningEmailToUsersAction;
 use VueFileManager\Subscription\Domain\DunningEmails\Actions\ScanSubscriptionsToSendDunningEmailAction;
+use VueFileManager\Subscription\Domain\DunningEmails\Actions\SendRepeatedDunningEmailToUsersAction;
+use VueFileManager\Subscription\Domain\FailedPayments\Actions\RetryChargeFromPaymentCardAction;
+use VueFileManager\Subscription\Support\EngineManager;
 
 class SubscriptionServiceProvider extends PackageServiceProvider
 {
@@ -44,10 +45,10 @@ class SubscriptionServiceProvider extends PackageServiceProvider
         $router->aliasMiddleware('admin', config('subscription.middlewares.admin'));
 
         // Load migrations
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // Register validator
-        Validator::extend('string_or_integer', fn ($attribute, $value) => is_string($value) || is_integer($value));
+        Validator::extend('string_or_integer', fn ($attribute, $value) => is_string($value) || is_int($value));
 
         // Schedule background operations
         $this->app->booted(function () {

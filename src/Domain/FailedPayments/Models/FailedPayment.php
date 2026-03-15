@@ -1,15 +1,17 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\FailedPayments\Models;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use VueFileManager\Subscription\Database\Factories\FailedPaymentFactory;
 
 /**
  * @method static create(array $array)
+ *
  * @property Model user
  * @property string id
  * @property string user_id
@@ -30,8 +32,8 @@ class FailedPayment extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'id'       => 'string',
-        'amount'   => 'float',
+        'id' => 'string',
+        'amount' => 'float',
         'metadata' => 'array',
     ];
 

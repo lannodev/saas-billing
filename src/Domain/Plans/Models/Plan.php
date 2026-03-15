@@ -1,16 +1,18 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Models;
 
-use Illuminate\Support\Str;
-use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
+use Kyslik\ColumnSortable\Sortable;
 use VueFileManager\Subscription\Database\Factories\PlanFactory;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
 
 /**
  * @method static create(array $array)
+ *
  * @property string id
  * @property string type
  * @property string name
@@ -28,9 +30,9 @@ class Plan extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'id'      => 'string',
+        'id' => 'string',
         'visible' => 'bool',
-        'amount'  => 'float',
+        'amount' => 'float',
     ];
 
     public $incrementing = false;

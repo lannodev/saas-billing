@@ -1,9 +1,10 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Actions;
 
 use Spatie\QueueableAction\QueueableAction;
-use VueFileManager\Subscription\Support\EngineManager;
 use VueFileManager\Subscription\Domain\Plans\Models\Plan;
+use VueFileManager\Subscription\Support\EngineManager;
 
 class DeletePlansFromPaymentServiceAction
 {
@@ -11,8 +12,7 @@ class DeletePlansFromPaymentServiceAction
 
     public function __construct(
         public EngineManager $subscription
-    ) {
-    }
+    ) {}
 
     public function __invoke(Plan $plan): void
     {

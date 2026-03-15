@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Miscellaneous\Stripe\Exceptions;
 
 use Exception;

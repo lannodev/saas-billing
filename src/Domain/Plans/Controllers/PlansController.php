@@ -1,18 +1,19 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use VueFileManager\Subscription\Domain\Plans\Models\Plan;
-use VueFileManager\Subscription\Domain\Plans\Resources\PlanResource;
-use VueFileManager\Subscription\Domain\Plans\DTO\CreateFixedPlanData;
-use VueFileManager\Subscription\Domain\Plans\Resources\PlanCollection;
-use VueFileManager\Subscription\Domain\Plans\DTO\CreateMeteredPlanData;
-use VueFileManager\Subscription\Domain\Plans\Requests\StorePlanRequest;
-use VueFileManager\Subscription\Domain\Plans\Requests\UpdatePlanRequest;
+use VueFileManager\Subscription\Domain\Plans\Actions\DeletePlansFromPaymentServiceAction;
 use VueFileManager\Subscription\Domain\Plans\Actions\StoreFixedPlanAction;
 use VueFileManager\Subscription\Domain\Plans\Actions\StoreMeteredPlanAction;
-use VueFileManager\Subscription\Domain\Plans\Actions\DeletePlansFromPaymentServiceAction;
+use VueFileManager\Subscription\Domain\Plans\DTO\CreateFixedPlanData;
+use VueFileManager\Subscription\Domain\Plans\DTO\CreateMeteredPlanData;
+use VueFileManager\Subscription\Domain\Plans\Models\Plan;
+use VueFileManager\Subscription\Domain\Plans\Requests\StorePlanRequest;
+use VueFileManager\Subscription\Domain\Plans\Requests\UpdatePlanRequest;
+use VueFileManager\Subscription\Domain\Plans\Resources\PlanCollection;
+use VueFileManager\Subscription\Domain\Plans\Resources\PlanResource;
 
 class PlansController extends Controller
 {
@@ -46,7 +47,7 @@ class PlansController extends Controller
     ): JsonResponse {
         if (is_demo()) {
             return response()->json([
-                'type'    => 'success',
+                'type' => 'success',
                 'message' => 'Subscription plan was stored successfully',
             ], 201);
         }
@@ -96,7 +97,7 @@ class PlansController extends Controller
         DeletePlansFromPaymentServiceAction $deletePlansFromPaymentService
     ): JsonResponse {
         $response = [
-            'type'    => 'success',
+            'type' => 'success',
             'message' => 'Subscription plan was successfully deleted',
         ];
 

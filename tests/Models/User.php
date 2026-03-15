@@ -1,30 +1,31 @@
 <?php
+
 namespace Tests\Models;
 
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\Factories\UserFactory;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use VueFileManager\Subscription\App\User\Traits\Billable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class User extends Model implements AuthorizableContract, AuthenticatableContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Notifiable;
-    use Authorizable;
     use Authenticatable;
-    use HasFactory;
+    use Authorizable;
     use Billable;
+    use HasFactory;
+    use Notifiable;
 
     protected $guarded = [];
 
     protected $casts = [
-        'id'                => 'string',
+        'id' => 'string',
         'email_verified_at' => 'datetime',
     ];
 

@@ -1,10 +1,11 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Credits\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class BonusCreditAddedNotification extends Notification implements ShouldQueue
 {
@@ -17,8 +18,7 @@ class BonusCreditAddedNotification extends Notification implements ShouldQueue
      */
     public function __construct(
         public string $bonus
-    ) {
-    }
+    ) {}
 
     public function via(): array
     {

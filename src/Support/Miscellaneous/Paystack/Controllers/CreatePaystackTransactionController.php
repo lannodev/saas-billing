@@ -1,11 +1,12 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Miscellaneous\Paystack\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use VueFileManager\Subscription\Domain\Plans\Models\PlanDriver;
-use VueFileManager\Subscription\Support\Services\PayStackHttpClient;
 use VueFileManager\Subscription\Support\Miscellaneous\Paystack\Requests\CreatePaystackTransactionRequest;
+use VueFileManager\Subscription\Support\Services\PayStackHttpClient;
 
 class CreatePaystackTransactionController
 {
@@ -22,17 +23,17 @@ class CreatePaystackTransactionController
             : $request->input('amount');
 
         $response = $this->post('/transaction/initialize', [
-            'amount'       => $amount,
-            'email'        => $user->email,
+            'amount' => $amount,
+            'email' => $user->email,
             'callback_url' => url('/user/settings/billing'),
-            'plan'         => $request->input('planCode') ?? null,
-            'channels'     => ['card', 'bank', 'ussd', 'qr', 'mobile_money', 'bank_transfer'],
+            'plan' => $request->input('planCode') ?? null,
+            'channels' => ['card', 'bank', 'ussd', 'qr', 'mobile_money', 'bank_transfer'],
         ]);
 
         return response()->json([
-            'type'    => 'success',
+            'type' => 'success',
             'message' => 'Checkout session was created successfully',
-            'data'    => [
+            'data' => [
                 'authorization_url' => $response->json()['data']['authorization_url'],
             ],
         ]);

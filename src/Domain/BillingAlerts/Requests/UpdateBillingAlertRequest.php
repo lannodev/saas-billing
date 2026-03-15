@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\BillingAlerts\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;

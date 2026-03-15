@@ -1,25 +1,26 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Engines;
 
 use Carbon\Carbon;
 use ErrorException;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Stripe\WebhookSignature;
 use Illuminate\Http\Client\Response;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Stripe\Exception\SignatureVerificationException;
-use VueFileManager\Subscription\Domain\Plans\Models\Plan;
-use VueFileManager\Subscription\Support\Webhooks\StripeWebhooks;
-use VueFileManager\Subscription\Domain\Customers\Models\Customer;
-use VueFileManager\Subscription\Support\Services\StripeHttpClient;
+use Stripe\WebhookSignature;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use VueFileManager\Subscription\Domain\Customers\Models\Customer;
 use VueFileManager\Subscription\Domain\Plans\DTO\CreateFixedPlanData;
+use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
+use VueFileManager\Subscription\Support\Services\StripeHttpClient;
+use VueFileManager\Subscription\Support\Webhooks\StripeWebhooks;
 
 class StripeEngine implements Engine
 {
-    use StripeWebhooks;
     use StripeHttpClient;
+    use StripeWebhooks;
 
     /*
      * https://stripe.com/docs/api/prices/retrieve?lang=php
@@ -39,8 +40,8 @@ class StripeEngine implements Engine
     {
         // Create product
         $product = $this->post('/products', [
-            'url'         => url('/'),
-            'name'        => $data->name,
+            'url' => url('/'),
+            'name' => $data->name,
             'description' => $data->description,
         ]);
 
@@ -51,10 +52,10 @@ class StripeEngine implements Engine
 
         // Next create subscription plan
         $price = $this->post('/prices', [
-            'product'     => $product->json()['id'],
-            'currency'    => strtolower($data->currency),
+            'product' => $product->json()['id'],
+            'currency' => strtolower($data->currency),
             'unit_amount' => $data->amount * 100,
-            'recurring'   => [
+            'recurring' => [
                 'interval' => $data->interval,
             ],
         ]);
@@ -65,7 +66,7 @@ class StripeEngine implements Engine
         }
 
         return [
-            'id'   => $price->json()['id'],
+            'id' => $price->json()['id'],
             'name' => $data->name,
         ];
     }
@@ -77,7 +78,7 @@ class StripeEngine implements Engine
     {
         // Update stripe product where are stored name and description
         return $this->post("/products/{$plan->driverId('stripe')}", [
-            'name'        => $plan->name,
+            'name' => $plan->name,
             'description' => $plan->description,
         ]);
     }
@@ -107,9 +108,9 @@ class StripeEngine implements Engine
             'metadata' => [
                 'id' => $user['id'],
             ],
-            'email'    => $user['email'],
-            'name'     => $user['name'] . ' ' . $user['surname'],
-            'phone'    => $user['phone'] ?? null,
+            'email' => $user['email'],
+            'name' => $user['name'].' '.$user['surname'],
+            'phone' => $user['phone'] ?? null,
         ]);
 
         // Check if there is any error
@@ -119,9 +120,9 @@ class StripeEngine implements Engine
 
         // Store customer id to the database
         Customer::create([
-            'user_id'        => $user['id'],
+            'user_id' => $user['id'],
             'driver_user_id' => $response->json()['id'],
-            'driver'         => 'stripe',
+            'driver' => 'stripe',
         ]);
 
         return $response;
@@ -138,7 +139,7 @@ class StripeEngine implements Engine
         // Update customer request
         return $this->post("/customers/{$user->customerId('stripe')}", [
             'email' => $user['email'],
-            'name'  => $user['name'] . ' ' . $user['surname'],
+            'name' => $user['name'].' '.$user['surname'],
             'phone' => $user['phone'] ?? null,
         ]);
     }
@@ -160,7 +161,7 @@ class StripeEngine implements Engine
 
         $response = $this->post('/subscriptions', [
             'customer' => $user->customerId('stripe'),
-            'items'    => [
+            'items' => [
                 [
                     'price' => $price['id'],
                 ],
@@ -184,7 +185,7 @@ class StripeEngine implements Engine
         return $this->post("/subscriptions/{$subscription->driverId()}", [
             'items' => [
                 [
-                    'id'    => $stripeSubscription->json()['items']['data'][0]['id'],
+                    'id' => $stripeSubscription->json()['items']['data'][0]['id'],
                     'price' => $originalPlan['id'],
                 ],
             ],
@@ -201,7 +202,7 @@ class StripeEngine implements Engine
 
         // Store end_at period and update status as cancelled
         $subscription->update([
-            'status'  => 'cancelled',
+            'status' => 'cancelled',
             'ends_at' => Carbon::createFromTimestamp($response->json()['current_period_end']),
         ]);
 
@@ -226,7 +227,7 @@ class StripeEngine implements Engine
         }
 
         // Extract method name
-        $method = 'handle' . Str::studly(str_replace('.', '_', $request->input('type')));
+        $method = 'handle'.Str::studly(str_replace('.', '_', $request->input('type')));
 
         if (method_exists($this, $method)) {
             $this->{$method}($request);

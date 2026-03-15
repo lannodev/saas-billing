@@ -1,13 +1,15 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Services;
 
+use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Promise\PromiseInterface;
 
 trait PayStackHttpClient
 {
     private string $bearer;
+
     private string $api;
 
     public function __construct()

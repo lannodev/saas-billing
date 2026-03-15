@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -19,8 +20,8 @@ class UpdatePlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'        => 'sometimes|string',
-            'visible'     => 'sometimes|bool',
+            'name' => 'sometimes|string',
+            'visible' => 'sometimes|bool',
             'description' => 'sometimes|string|nullable',
         ];
     }

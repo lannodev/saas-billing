@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Mocking\Stripe;
 
 use Illuminate\Support\Facades\Http;
@@ -9,13 +10,13 @@ class DeletePlanStripeMocksClass
     {
         return Http::fake([
             'https://api.stripe.com/v1/plans/*' => Http::response([
-                'id'      => 'price_HKL7vHEYRSC4Ur',
-                'object'  => 'plan',
+                'id' => 'price_HKL7vHEYRSC4Ur',
+                'object' => 'plan',
                 'deleted' => true,
             ]),
             'https://api.stripe.com/v1/products/*' => Http::response([
-                'id'      => 'prod_HKL7vHEYRSC4Ur',
-                'object'  => 'product',
+                'id' => 'prod_HKL7vHEYRSC4Ur',
+                'object' => 'product',
                 'deleted' => true,
             ]),
         ]);

@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Transactions\Controllers;
 
 use Illuminate\Routing\Controller;

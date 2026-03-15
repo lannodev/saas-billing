@@ -1,23 +1,25 @@
 <?php
+
 namespace Tests\Domain\Customers;
 
-use Tests\TestCase;
-use Tests\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use VueFileManager\Subscription\Support\EngineManager;
-use Tests\Mocking\Stripe\CreateCustomerStripeMocksClass;
-use Tests\Mocking\Stripe\UpdateCustomerStripeMocksClass;
+use Illuminate\Support\Str;
 use Tests\Mocking\PayStack\CreateCustomerPaystackMocksClass;
 use Tests\Mocking\PayStack\UpdateCustomerPaystackMocksClass;
+use Tests\Mocking\Stripe\CreateCustomerStripeMocksClass;
+use Tests\Mocking\Stripe\UpdateCustomerStripeMocksClass;
+use Tests\Models\User;
+use Tests\TestCase;
 use VueFileManager\Subscription\Domain\Customers\Models\Customer;
+use VueFileManager\Subscription\Support\EngineManager;
 
 class CustomersTest extends TestCase
 {
     public Model $user;
+
     public EngineManager $subscription;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -38,11 +40,11 @@ class CustomersTest extends TestCase
             ->each(function ($driver) {
                 $response = $this->subscription->driver($driver)
                     ->createCustomer([
-                        'id'      => $this->user->id,
-                        'email'   => $this->user->email,
-                        'name'    => 'John',
+                        'id' => $this->user->id,
+                        'email' => $this->user->email,
+                        'name' => 'John',
                         'surname' => 'Doe',
-                        'phone'   => '+421 950 123 456',
+                        'phone' => '+421 950 123 456',
                     ]);
 
                 $this->assertTrue($response->ok());
@@ -51,11 +53,11 @@ class CustomersTest extends TestCase
         $this
             ->assertDatabaseHas('customers', [
                 'user_id' => $this->user->id,
-                'driver'  => 'paystack',
+                'driver' => 'paystack',
             ])
             ->assertDatabaseHas('customers', [
                 'user_id' => $this->user->id,
-                'driver'  => 'stripe',
+                'driver' => 'stripe',
             ]);
     }
 
@@ -68,9 +70,9 @@ class CustomersTest extends TestCase
         collect(['stripe', 'paystack'])
             ->each(
                 fn ($driver) => Customer::create([
-                    'user_id'        => $this->user->id,
+                    'user_id' => $this->user->id,
                     'driver_user_id' => Str::random(),
-                    'driver'         => $driver,
+                    'driver' => $driver,
                 ])
             );
 
@@ -83,11 +85,11 @@ class CustomersTest extends TestCase
                 $response = $this->subscription
                     ->driver($driver)
                     ->updateCustomer([
-                        'id'      => $this->user->id,
-                        'email'   => $this->user->email,
-                        'name'    => 'Jane',
+                        'id' => $this->user->id,
+                        'email' => $this->user->email,
+                        'name' => 'Jane',
                         'surname' => 'Does',
-                        'phone'   => '+421 950 456 123',
+                        'phone' => '+421 950 456 123',
                     ]);
 
                 $this->assertTrue($response->ok());

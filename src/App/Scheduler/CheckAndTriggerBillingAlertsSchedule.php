@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\App\Scheduler;
 
 use VueFileManager\Subscription\Domain\BillingAlerts\Models\BillingAlert;
@@ -8,8 +9,7 @@ class CheckAndTriggerBillingAlertsSchedule
 {
     public function __construct(
         public SumUsageForCurrentPeriodAction $sumUsageForCurrentPeriod
-    ) {
-    }
+    ) {}
 
     public function __invoke()
     {
@@ -28,7 +28,7 @@ class CheckAndTriggerBillingAlertsSchedule
                     $BillingAlertTriggeredNotification = config('subscription.notifications.BillingAlertTriggeredNotification');
 
                     // Notify user
-                    $alert->user->notify(new $BillingAlertTriggeredNotification());
+                    $alert->user->notify(new $BillingAlertTriggeredNotification);
                 }
             });
     }

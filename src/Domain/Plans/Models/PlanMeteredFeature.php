@@ -1,14 +1,16 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Models;
 
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use VueFileManager\Subscription\Database\Factories\PlanMeteredFeatureFactory;
 
 /**
  * @method static create(array $array)
+ *
  * @property string id
  * @property string plan_id
  * @property string key
@@ -21,7 +23,7 @@ class PlanMeteredFeature extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'id'    => 'string',
+        'id' => 'string',
         'value' => 'integer',
     ];
 

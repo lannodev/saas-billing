@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Webhooks;
 
 use Illuminate\Http\Request;

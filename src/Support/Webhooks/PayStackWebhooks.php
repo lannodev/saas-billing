@@ -1,16 +1,17 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Webhooks;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use VueFileManager\Subscription\Support\EngineManager;
-use VueFileManager\Subscription\Domain\Plans\Models\PlanDriver;
 use VueFileManager\Subscription\Domain\Customers\Models\Customer;
-use VueFileManager\Subscription\Support\Events\SubscriptionWasCreated;
-use VueFileManager\Subscription\Support\Events\SubscriptionWasUpdated;
-use VueFileManager\Subscription\Support\Events\SubscriptionWasCancelled;
+use VueFileManager\Subscription\Domain\Plans\Models\PlanDriver;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\SubscriptionDriver;
+use VueFileManager\Subscription\Support\EngineManager;
+use VueFileManager\Subscription\Support\Events\SubscriptionWasCancelled;
+use VueFileManager\Subscription\Support\Events\SubscriptionWasCreated;
+use VueFileManager\Subscription\Support\Events\SubscriptionWasUpdated;
 
 trait PayStackWebhooks
 {
@@ -35,7 +36,7 @@ trait PayStackWebhooks
             $customer = $user->customers()
                 ->create([
                     'driver_user_id' => $customerCode,
-                    'driver'         => 'paystack',
+                    'driver' => 'paystack',
                 ]);
         }
 
@@ -53,10 +54,10 @@ trait PayStackWebhooks
 
             // Update subscription
             $customer->user->subscription()->update([
-                'plan_id'       => $planDriver->plan->id,
-                'name'          => $planDriver->plan->name,
-                'status'        => 'active',
-                'ends_at'       => null,
+                'plan_id' => $planDriver->plan->id,
+                'name' => $planDriver->plan->name,
+                'status' => 'active',
+                'ends_at' => null,
                 'trial_ends_at' => null,
             ]);
 
@@ -75,17 +76,17 @@ trait PayStackWebhooks
         // Create new subscription
         if (! $customer->user->subscription) {
             $subscription = Subscription::create([
-                'type'    => 'fixed',
+                'type' => 'fixed',
                 'plan_id' => $planDriver->plan->id,
                 'user_id' => $customer->user_id,
-                'name'    => $planDriver->plan->name,
+                'name' => $planDriver->plan->name,
             ]);
 
             // Store subscription pivot to gateway
             $subscription
                 ->driver()
                 ->create([
-                    'driver'                 => 'paystack',
+                    'driver' => 'paystack',
                     'driver_subscription_id' => $subscriptionCode,
                 ]);
 
@@ -110,7 +111,7 @@ trait PayStackWebhooks
 
         if ($driver->subscription->active()) {
             $driver->subscription->update([
-                'status'  => 'cancelled',
+                'status' => 'cancelled',
                 'ends_at' => $endsAt,
             ]);
 
@@ -144,13 +145,13 @@ trait PayStackWebhooks
             );
 
             $user->transactions()->create([
-                'status'    => 'completed',
-                'type'      => 'charge',
-                'driver'    => 'paystack',
-                'note'      => 'Account Fund',
+                'status' => 'completed',
+                'type' => 'charge',
+                'driver' => 'paystack',
+                'note' => 'Account Fund',
                 'reference' => $request->input('data.reference'),
-                'currency'  => $request->input('data.currency'),
-                'amount'    => $request->input('data.amount') / 100,
+                'currency' => $request->input('data.currency'),
+                'amount' => $request->input('data.amount') / 100,
             ]);
 
             // Remove dunning warning
@@ -186,13 +187,13 @@ trait PayStackWebhooks
 
             // Store transaction
             $user->transactions()->create([
-                'status'    => 'completed',
-                'type'      => 'charge',
-                'driver'    => 'paystack',
-                'note'      => $request->input('data.plan.name'),
+                'status' => 'completed',
+                'type' => 'charge',
+                'driver' => 'paystack',
+                'note' => $request->input('data.plan.name'),
                 'reference' => $request->input('data.reference'),
-                'currency'  => $request->input('data.currency'),
-                'amount'    => $request->input('data.amount') / 100,
+                'currency' => $request->input('data.currency'),
+                'amount' => $request->input('data.amount') / 100,
             ]);
         }
     }

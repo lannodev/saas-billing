@@ -1,8 +1,9 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Events;
 
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
 
 class SubscriptionWasExpired
@@ -11,6 +12,5 @@ class SubscriptionWasExpired
 
     public function __construct(
         public Subscription $subscription
-    ) {
-    }
+    ) {}
 }

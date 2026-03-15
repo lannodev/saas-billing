@@ -1,15 +1,17 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Subscriptions\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use VueFileManager\Subscription\Database\Factories\SubscriptionDriverFactory;
 
 /**
  * @property string subscription_id
  * @property string driver_subscription_id
  * @property string driver
+ *
  * @method static where(string $key, string $value)
  */
 class SubscriptionDriver extends Model

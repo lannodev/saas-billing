@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Usage\Actions;
 
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
@@ -21,14 +22,14 @@ class SumUsageForCurrentPeriodAction
                     ->where('metered_feature_id', $feature->id);
 
                 $usage = match ($feature->aggregate_strategy) {
-                    'sum_of_usage'  => $usageQuery->sum('quantity'),
+                    'sum_of_usage' => $usageQuery->sum('quantity'),
                     'maximum_usage' => $usageQuery->max('quantity'),
                 };
 
                 return [
                     'feature' => $feature->key,
-                    'amount'  => round(($tier->per_unit * $usage) + $tier->flat_fee, 4),
-                    'usage'   => $usage,
+                    'amount' => round(($tier->per_unit * $usage) + $tier->flat_fee, 4),
+                    'usage' => $usage,
                 ];
             });
     }

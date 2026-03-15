@@ -1,8 +1,9 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Miscellaneous\Stripe\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use VueFileManager\Subscription\Support\EngineManager;
 use VueFileManager\Subscription\Support\Services\StripeHttpClient;
@@ -21,18 +22,18 @@ class CreateStripeSessionController
         // Create Stripe session
         $session = $this->post('/checkout/sessions', [
             'success_url' => url('/user/settings/billing'),
-            'cancel_url'  => url('/user/settings/billing'),
-            'line_items'  => $this->getPlanPrices(),
-            'mode'        => 'subscription',
-            'customer'    => $customerId,
+            'cancel_url' => url('/user/settings/billing'),
+            'line_items' => $this->getPlanPrices(),
+            'mode' => 'subscription',
+            'customer' => $customerId,
         ]);
 
         // Return error response if request failed
         if ($session->failed()) {
             abort(
                 response()->json([
-                    'type'    => 'checkout-creation-error',
-                    'title'   => "Your payment couldn't be created",
+                    'type' => 'checkout-creation-error',
+                    'title' => "Your payment couldn't be created",
                     'message' => $session->json()['error']['message'],
                 ], 500)
             );
@@ -40,9 +41,9 @@ class CreateStripeSessionController
 
         // Return stripe checkout url
         return response()->json([
-            'type'    => 'success',
+            'type' => 'success',
             'message' => 'Checkout session was created successfully',
-            'url'     => $session->json()['url'],
+            'url' => $session->json()['url'],
         ], 201);
     }
 
@@ -50,7 +51,7 @@ class CreateStripeSessionController
     {
         return [
             [
-                'price'    => request()->input('planCode'),
+                'price' => request()->input('planCode'),
                 'quantity' => 1,
             ],
         ];
@@ -61,9 +62,9 @@ class CreateStripeSessionController
         $customer = resolve(EngineManager::class)
             ->driver('stripe')
             ->createCustomer([
-                'id'      => $user->id,
-                'email'   => $user->email,
-                'name'    => $user->settings->first_name ?? null,
+                'id' => $user->id,
+                'email' => $user->email,
+                'name' => $user->settings->first_name ?? null,
                 'surname' => $user->settings->last_name ?? null,
             ]);
 

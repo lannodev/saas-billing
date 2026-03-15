@@ -1,14 +1,16 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Customers\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use VueFileManager\Subscription\Database\Factories\CustomerFactory;
 
 /**
  * @method static create(array $array)
  * @method static where(string $key, string $value)
+ *
  * @property string user_id
  * @property string driver
  * @property string driver_user_id

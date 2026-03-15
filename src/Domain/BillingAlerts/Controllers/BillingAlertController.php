@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\BillingAlerts\Controllers;
 
 use Illuminate\Http\JsonResponse;
@@ -12,7 +13,7 @@ class BillingAlertController extends Controller
         StoreBillingAlertRequest $request
     ): JsonResponse {
         $message = [
-            'type'    => 'success',
+            'type' => 'success',
             'message' => 'Billing alert was stored successfully',
         ];
 
@@ -23,7 +24,7 @@ class BillingAlertController extends Controller
         // Check if billing alert exists
         if ($request->user()->billingAlert()->exists()) {
             return response()->json([
-                'type'    => 'error',
+                'type' => 'error',
                 'message' => 'You already have created billing alert.',
             ], 422);
         }
@@ -43,7 +44,7 @@ class BillingAlertController extends Controller
         UpdateBillingAlertRequest $request,
     ): JsonResponse {
         $message = [
-            'type'    => 'success',
+            'type' => 'success',
             'message' => 'Billing alert was updated successfully',
         ];
 
@@ -52,7 +53,7 @@ class BillingAlertController extends Controller
         }
 
         $request->user()->billingAlert->update([
-            'amount'    => $request->input('amount'),
+            'amount' => $request->input('amount'),
             'triggered' => false,
         ]);
 
@@ -62,7 +63,7 @@ class BillingAlertController extends Controller
     public function destroy(): JsonResponse
     {
         $message = [
-            'type'    => 'success',
+            'type' => 'success',
             'message' => 'Billing alert was deleted successfully',
         ];
 

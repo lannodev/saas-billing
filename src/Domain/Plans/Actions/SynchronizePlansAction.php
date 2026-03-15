@@ -1,18 +1,18 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Actions;
 
 use ErrorException;
 use Illuminate\Support\Facades\Log;
-use VueFileManager\Subscription\Support\EngineManager;
-use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Plans\DTO\CreateFixedPlanData;
+use VueFileManager\Subscription\Domain\Plans\Models\Plan;
+use VueFileManager\Subscription\Support\EngineManager;
 
 class SynchronizePlansAction
 {
     public function __construct(
         private EngineManager $subscription,
-    ) {
-    }
+    ) {}
 
     public function __invoke(): array
     {
@@ -47,13 +47,13 @@ class SynchronizePlansAction
 
                     // Format data
                     $data = CreateFixedPlanData::fromArray([
-                        'type'        => 'fixed',
-                        'name'        => $plan->name,
+                        'type' => 'fixed',
+                        'name' => $plan->name,
                         'description' => $plan->description,
-                        'interval'    => $plan->interval,
-                        'amount'      => $plan->amount,
-                        'currency'    => $plan->currency,
-                        'features'    => [],
+                        'interval' => $plan->interval,
+                        'amount' => $plan->amount,
+                        'currency' => $plan->currency,
+                        'features' => [],
                     ]);
 
                     $newPlan = $this->subscription
@@ -65,7 +65,7 @@ class SynchronizePlansAction
                         ->drivers()
                         ->create([
                             'driver_plan_id' => $newPlan['id'],
-                            'driver'         => $driver,
+                            'driver' => $driver,
                         ]);
                 } catch (ErrorException $error) {
                     // Format message

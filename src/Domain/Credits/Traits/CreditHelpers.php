@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Credits\Traits;
 
 use VueFileManager\Subscription\Domain\Credits\Exceptions\InsufficientBalanceException;
@@ -36,7 +37,7 @@ trait CreditHelpers
     {
         // Check if user has sufficient balance
         if ($this->balance->amount < $balance) {
-            throw new InsufficientBalanceException();
+            throw new InsufficientBalanceException;
         }
 
         // Decrease balance

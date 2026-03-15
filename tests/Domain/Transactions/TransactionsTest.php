@@ -1,8 +1,9 @@
 <?php
+
 namespace Tests\Domain\Transactions;
 
-use Tests\TestCase;
 use Tests\Models\User;
+use Tests\TestCase;
 
 class TransactionsTest extends TestCase
 {
@@ -20,6 +21,7 @@ class TransactionsTest extends TestCase
             ->getJson('/api/subscriptions/transactions')
             ->assertOk();
     }
+
     /**
      * @test
      */

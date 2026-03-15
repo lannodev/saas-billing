@@ -1,15 +1,17 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Services;
 
 use ErrorException;
-use Illuminate\Http\Client\Response;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 trait PayPalHttpClient
 {
     private string $id;
+
     private string $secret;
 
     private string $api;
@@ -57,8 +59,8 @@ trait PayPalHttpClient
                     'text/plain'
                 )
                 ->withHeaders([
-                    'Content-Type'    => 'application/x-www-form-urlencoded',
-                    'Accept'          => 'application/json',
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'Accept' => 'application/json',
                     'Accept-Language' => 'en_US',
                 ])->post("$this->api/oauth2/token");
 

@@ -1,34 +1,34 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Actions;
 
 use ErrorException;
-use VueFileManager\Subscription\Support\EngineManager;
-use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Plans\DTO\CreateFixedPlanData;
+use VueFileManager\Subscription\Domain\Plans\Models\Plan;
+use VueFileManager\Subscription\Support\EngineManager;
 
 class StoreFixedPlanAction
 {
     public function __construct(
         private EngineManager $subscription,
-    ) {
-    }
+    ) {}
 
     public function __invoke(CreateFixedPlanData $data)
     {
         // Create plan
         $plan = Plan::create([
-            'type'        => 'fixed',
-            'name'        => $data->name,
+            'type' => 'fixed',
+            'name' => $data->name,
             'description' => $data->description,
-            'interval'    => $data->interval,
-            'amount'      => $data->amount,
-            'currency'    => $data->currency,
+            'interval' => $data->interval,
+            'amount' => $data->amount,
+            'currency' => $data->currency,
         ]);
 
         // Create features
         foreach ($data->features as $feature => $value) {
             $plan->fixedFeatures()->create([
-                'key'   => $feature,
+                'key' => $feature,
                 'value' => $value,
             ]);
         }
@@ -47,7 +47,7 @@ class StoreFixedPlanAction
                         ->drivers()
                         ->create([
                             'driver_plan_id' => $driverPlan['id'],
-                            'driver'         => $driver,
+                            'driver' => $driver,
                         ]);
                 } catch (ErrorException $error) {
                     // Delete previously created plan
@@ -56,8 +56,8 @@ class StoreFixedPlanAction
                     // Return error response
                     abort(
                         response()->json([
-                            'type'    => 'plan-creation-error',
-                            'title'   => "Plan couldn't be created",
+                            'type' => 'plan-creation-error',
+                            'title' => "Plan couldn't be created",
                             'message' => $error->getMessage(),
                         ], 500)
                     );

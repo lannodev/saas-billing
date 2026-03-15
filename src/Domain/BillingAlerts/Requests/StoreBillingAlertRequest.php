@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\BillingAlerts\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -19,7 +20,7 @@ class StoreBillingAlertRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'amount'        => 'required|numeric',
+            'amount' => 'required|numeric',
         ];
     }
 }

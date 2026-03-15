@@ -6,9 +6,9 @@
 function mapPaystackIntervals(string $interval): string
 {
     return match ($interval) {
-        'day'   => 'daily',
-        'week'  => 'weekly',
+        'day' => 'daily',
+        'week' => 'weekly',
         'month' => 'monthly',
-        'year'  => 'annually',
+        'year' => 'annually',
     };
 }

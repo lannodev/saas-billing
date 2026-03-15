@@ -1,20 +1,21 @@
 <?php
+
 namespace Tests\Domain\Plans;
 
-use Tests\TestCase;
-use Tests\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
-use Tests\Mocking\Stripe\GetPlanStripeMocksClass;
+use Illuminate\Support\Str;
 use Tests\Mocking\PayPal\CreatePlanPayPalMocksClass;
 use Tests\Mocking\PayPal\DeletePlanPayPalMocksClass;
 use Tests\Mocking\PayPal\UpdatePlanPayPalMocksClass;
-use Tests\Mocking\Stripe\CreatePlanStripeMocksClass;
-use Tests\Mocking\Stripe\DeletePlanStripeMocksClass;
-use Tests\Mocking\Stripe\UpdatePlanStripeMocksClass;
 use Tests\Mocking\PayStack\CreatePlanPaystackMocksClass;
 use Tests\Mocking\PayStack\DeletePlanPaystackMocksClass;
 use Tests\Mocking\PayStack\UpdatePlanPaystackMocksClass;
+use Tests\Mocking\Stripe\CreatePlanStripeMocksClass;
+use Tests\Mocking\Stripe\DeletePlanStripeMocksClass;
+use Tests\Mocking\Stripe\GetPlanStripeMocksClass;
+use Tests\Mocking\Stripe\UpdatePlanStripeMocksClass;
+use Tests\Models\User;
+use Tests\TestCase;
 use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Plans\Models\PlanDriver;
 use VueFileManager\Subscription\Domain\Plans\Models\PlanFixedFeature;
@@ -87,15 +88,15 @@ class FixedPlansTest extends TestCase
         $this
             ->actingAs($user)
             ->post('/api/subscriptions/admin/plans', [
-                'type'        => $plan->type,
-                'name'        => $plan->name,
+                'type' => $plan->type,
+                'name' => $plan->name,
                 'description' => $plan->description,
-                'interval'    => $plan->interval,
-                'amount'      => $plan->amount,
-                'currency'    => 'USD',
-                'features'    => [
+                'interval' => $plan->interval,
+                'amount' => $plan->amount,
+                'currency' => 'USD',
+                'features' => [
                     'max_storage_amount' => 100,
-                    'max_team_members'   => 6,
+                    'max_team_members' => 6,
                 ],
             ])
             ->assertCreated()
@@ -113,23 +114,23 @@ class FixedPlansTest extends TestCase
 
         $this
             ->assertDatabaseHas('plans', [
-                'type'        => 'fixed',
-                'name'        => $plan->name,
+                'type' => 'fixed',
+                'name' => $plan->name,
                 'description' => $plan->description,
-                'currency'    => 'USD',
-                'status'      => 'active',
+                'currency' => 'USD',
+                'status' => 'active',
             ])
             ->assertDatabaseHas('plan_fixed_features', [
-                'key'   => 'max_storage_amount',
+                'key' => 'max_storage_amount',
                 'value' => 100,
             ])
             ->assertDatabaseHas('plan_fixed_features', [
-                'key'   => 'max_team_members',
+                'key' => 'max_team_members',
                 'value' => 6,
             ]);
 
         // TODO: this can't be fixed, must be flexible for new gateway development
-        //Http::assertSentCount(4);
+        // Http::assertSentCount(4);
     }
 
     /**
@@ -149,9 +150,9 @@ class FixedPlansTest extends TestCase
         collect(['max_storage_amount', 'max_team_members'])
             ->each(
                 fn ($feature) => PlanFixedFeature::create([
-                    'plan_id'        => $plan->id,
-                    'key'            => $feature,
-                    'value'          => 10,
+                    'plan_id' => $plan->id,
+                    'key' => $feature,
+                    'value' => 10,
                 ])
             );
 
@@ -159,8 +160,8 @@ class FixedPlansTest extends TestCase
         collect(getActiveDrivers())
             ->each(
                 fn ($driver) => PlanDriver::create([
-                    'driver'         => $driver,
-                    'plan_id'        => $plan->id,
+                    'driver' => $driver,
+                    'plan_id' => $plan->id,
                     'driver_plan_id' => Str::random(),
                 ])
             );
@@ -171,15 +172,15 @@ class FixedPlansTest extends TestCase
 
         // Attributes to update
         $planAttributes = [
-            'visible'     => false,
-            'name'        => 'New name',
+            'visible' => false,
+            'name' => 'New name',
             'description' => 'New description',
         ];
 
         // Features to update
         $planFeatures = [
             'max_storage_amount' => 120,
-            'max_team_members'   => '12',
+            'max_team_members' => '12',
         ];
 
         // Update plan attributes one by one
@@ -213,17 +214,17 @@ class FixedPlansTest extends TestCase
         // Check updated results
         $this
             ->assertDatabaseHas('plans', [
-                'type'        => 'fixed',
-                'visible'     => false,
-                'name'        => 'New name',
+                'type' => 'fixed',
+                'visible' => false,
+                'name' => 'New name',
                 'description' => 'New description',
             ])
             ->assertDatabaseHas('plan_fixed_features', [
-                'key'   => 'max_storage_amount',
+                'key' => 'max_storage_amount',
                 'value' => 120,
             ])
             ->assertDatabaseHas('plan_fixed_features', [
-                'key'   => 'max_team_members',
+                'key' => 'max_team_members',
                 'value' => 12,
             ])
             ->assertTrue(! cache()->has('action.synchronize-plans'));
@@ -245,18 +246,18 @@ class FixedPlansTest extends TestCase
 
         Subscription::factory()
             ->create([
-                'type'       => 'fixed',
-                'status'     => 'active',
-                'plan_id'    => $plan->id,
-                'user_id'    => $user->id,
+                'type' => 'fixed',
+                'status' => 'active',
+                'plan_id' => $plan->id,
+                'user_id' => $user->id,
             ]);
 
         // Create plan drivers
         collect(getActiveDrivers())
             ->each(
                 fn ($driver) => PlanDriver::create([
-                    'driver'         => $driver,
-                    'plan_id'        => $plan->id,
+                    'driver' => $driver,
+                    'plan_id' => $plan->id,
                     'driver_plan_id' => Str::random(),
                 ])
             );
@@ -273,9 +274,9 @@ class FixedPlansTest extends TestCase
             ->assertOk();
 
         $this->assertDatabaseHas('plans', [
-            'type'        => 'fixed',
-            'id'          => $plan->id,
-            'status'      => 'archived',
+            'type' => 'fixed',
+            'id' => $plan->id,
+            'status' => 'archived',
         ]);
     }
 
@@ -297,8 +298,8 @@ class FixedPlansTest extends TestCase
         collect(getActiveDrivers())
             ->each(
                 fn ($driver) => PlanDriver::create([
-                    'driver'         => $driver,
-                    'plan_id'        => $plan->id,
+                    'driver' => $driver,
+                    'plan_id' => $plan->id,
                     'driver_plan_id' => Str::random(),
                 ])
             );
@@ -319,7 +320,7 @@ class FixedPlansTest extends TestCase
             ->assertDatabaseCount('plan_drivers', 0)
             ->assertDatabaseMissing('plans', [
                 'type' => 'fixed',
-                'id'   => $plan->id,
+                'id' => $plan->id,
             ]);
     }
 }

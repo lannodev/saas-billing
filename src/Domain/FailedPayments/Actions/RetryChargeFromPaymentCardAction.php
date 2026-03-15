@@ -1,16 +1,16 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\FailedPayments\Actions;
 
 use VueFileManager\Subscription\Domain\FailedPayments\Models\FailedPayment;
-use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Exceptions\ChargeFailedException;
 use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Actions\ChargeFromSavedPaymentMethodAction;
+use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Exceptions\ChargeFailedException;
 
 class RetryChargeFromPaymentCardAction
 {
     public function __construct(
         public ChargeFromSavedPaymentMethodAction $chargeFromSavedPaymentMethod,
-    ) {
-    }
+    ) {}
 
     public function __invoke($user = null)
     {
@@ -28,13 +28,13 @@ class RetryChargeFromPaymentCardAction
                     // Create transaction
                     $payment->user->transactions()->create([
                         'reference' => $charge['charges']['data'][0]['id'],
-                        'type'      => 'charge',
-                        'status'    => 'completed',
-                        'note'      => $payment->note,
-                        'currency'  => $payment->currency,
-                        'amount'    => $payment->amount,
-                        'driver'    => 'stripe',
-                        'metadata'  => $payment->metadata,
+                        'type' => 'charge',
+                        'status' => 'completed',
+                        'note' => $payment->note,
+                        'currency' => $payment->currency,
+                        'amount' => $payment->amount,
+                        'driver' => 'stripe',
+                        'metadata' => $payment->metadata,
                     ]);
 
                     // Delete failed payment record
@@ -48,7 +48,7 @@ class RetryChargeFromPaymentCardAction
                         // Get notification
                         $ChargeFromCreditCardFailedAgainNotification = config('subscription.notifications.ChargeFromCreditCardFailedAgainNotification');
 
-                        $payment->user->notify(new $ChargeFromCreditCardFailedAgainNotification());
+                        $payment->user->notify(new $ChargeFromCreditCardFailedAgainNotification);
                     }
                 }
             });

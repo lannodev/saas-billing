@@ -12,10 +12,10 @@ class PlanMeteredFeatureFactory extends Factory
     public function definition(): array
     {
         return [
-            'id'        => $this->faker->uuid,
-            'plan_id'   => $this->faker->uuid,
+            'id' => $this->faker->uuid,
+            'plan_id' => $this->faker->uuid,
             'aggregate_strategy' => $this->faker->randomElement(['sum_of_usage', 'maximum_usage']),
-            'key'       => $this->faker->randomElement(['bandwidth', 'storage', 'members']),
+            'key' => $this->faker->randomElement(['bandwidth', 'storage', 'members']),
         ];
     }
 }

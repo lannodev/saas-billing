@@ -1,14 +1,16 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property string plan_id
  * @property string driver_plan_id
  * @property string driver
+ *
  * @method static where(string $key, string $value)
  */
 class PlanDriver extends Model

@@ -12,11 +12,11 @@ class DunningFactory extends Factory
     public function definition(): array
     {
         return [
-            'id'         => $this->faker->uuid,
-            'user_id'    => $this->faker->uuid,
-            'sequence'   => 2,
-            'type'       => $this->faker->randomElement([
-                'limit_usage_in_new_accounts', 'usage_bigger_than_balance'
+            'id' => $this->faker->uuid,
+            'user_id' => $this->faker->uuid,
+            'sequence' => 2,
+            'type' => $this->faker->randomElement([
+                'limit_usage_in_new_accounts', 'usage_bigger_than_balance',
             ]),
             'created_at' => now(),
             'updated_at' => now(),

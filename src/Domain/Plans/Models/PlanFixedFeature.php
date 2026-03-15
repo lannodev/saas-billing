@@ -1,12 +1,14 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use VueFileManager\Subscription\Database\Factories\PlanFixedFeatureFactory;
 
 /**
  * @method static create(array $array)
+ *
  * @property string plan_id
  * @property string key
  * @property string value
@@ -18,7 +20,7 @@ class PlanFixedFeature extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'id'    => 'string',
+        'id' => 'string',
         'value' => 'integer',
     ];
 

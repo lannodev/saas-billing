@@ -1,17 +1,18 @@
 <?php
+
 namespace Tests\Domain\DunningEmails;
 
 use Carbon\Carbon;
-use Tests\TestCase;
-use Tests\Models\User;
 use Illuminate\Support\Facades\Notification;
-use VueFileManager\Subscription\Domain\Plans\Models\Plan;
+use Tests\Models\User;
+use Tests\TestCase;
+use VueFileManager\Subscription\Domain\DunningEmails\Actions\ScanSubscriptionsToSendDunningEmailAction;
+use VueFileManager\Subscription\Domain\DunningEmails\Actions\SendRepeatedDunningEmailToUsersAction;
 use VueFileManager\Subscription\Domain\DunningEmails\Models\Dunning;
+use VueFileManager\Subscription\Domain\DunningEmails\Notifications\DunningEmailToCoverAccountUsageNotification;
+use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Plans\Models\PlanMeteredFeature;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
-use VueFileManager\Subscription\Domain\DunningEmails\Actions\SendRepeatedDunningEmailToUsersAction;
-use VueFileManager\Subscription\Domain\DunningEmails\Actions\ScanSubscriptionsToSendDunningEmailAction;
-use VueFileManager\Subscription\Domain\DunningEmails\Notifications\DunningEmailToCoverAccountUsageNotification;
 
 class DunningNotificationsTest extends TestCase
 {
@@ -29,32 +30,32 @@ class DunningNotificationsTest extends TestCase
 
         $plan = Plan::factory()
             ->create([
-                'type'     => 'metered',
+                'type' => 'metered',
                 'currency' => 'USD',
             ]);
 
         PlanMeteredFeature::factory()
             ->hasTiers([
                 'first_unit' => 1,
-                'last_unit'  => null,
-                'per_unit'   => 0.29,
-                'flat_fee'   => 2.49,
+                'last_unit' => null,
+                'per_unit' => 0.29,
+                'flat_fee' => 2.49,
             ])
             ->create([
-                'plan_id'            => $plan->id,
-                'key'                => 'bandwidth',
+                'plan_id' => $plan->id,
+                'key' => 'bandwidth',
                 'aggregate_strategy' => 'sum_of_usage',
             ]);
 
         $subscription = Subscription::factory()
             ->create([
-                'type'       => 'pre-paid',
-                'status'     => 'active',
-                'plan_id'    => $plan->id,
-                'user_id'    => $user->id,
-                'renews_at'  => now(),
+                'type' => 'pre-paid',
+                'status' => 'active',
+                'plan_id' => $plan->id,
+                'user_id' => $user->id,
+                'renews_at' => now(),
                 'created_at' => now()->subDays(15),
-                'ends_at'    => null,
+                'ends_at' => null,
             ]);
 
         foreach (range(1, 15) as $i) {
@@ -75,9 +76,9 @@ class DunningNotificationsTest extends TestCase
         Notification::assertSentTo($user, DunningEmailToCoverAccountUsageNotification::class);
 
         $this->assertDatabaseHas('dunnings', [
-            'user_id'  => $user->id,
+            'user_id' => $user->id,
             'sequence' => 1,
-            'type'     => 'usage_bigger_than_balance',
+            'type' => 'usage_bigger_than_balance',
         ]);
     }
 
@@ -91,32 +92,32 @@ class DunningNotificationsTest extends TestCase
 
         $plan = Plan::factory()
             ->create([
-                'type'     => 'metered',
+                'type' => 'metered',
                 'currency' => 'USD',
             ]);
 
         PlanMeteredFeature::factory()
             ->hasTiers([
                 'first_unit' => 1,
-                'last_unit'  => null,
-                'per_unit'   => 0.29,
-                'flat_fee'   => 2.49,
+                'last_unit' => null,
+                'per_unit' => 0.29,
+                'flat_fee' => 2.49,
             ])
             ->create([
-                'plan_id'            => $plan->id,
-                'key'                => 'bandwidth',
+                'plan_id' => $plan->id,
+                'key' => 'bandwidth',
                 'aggregate_strategy' => 'sum_of_usage',
             ]);
 
         $subscription = Subscription::factory()
             ->create([
-                'type'       => 'pre-paid',
-                'status'     => 'active',
-                'plan_id'    => $plan->id,
-                'user_id'    => $user->id,
-                'renews_at'  => now(),
+                'type' => 'pre-paid',
+                'status' => 'active',
+                'plan_id' => $plan->id,
+                'user_id' => $user->id,
+                'renews_at' => now(),
                 'created_at' => now()->subDays(15),
-                'ends_at'    => null,
+                'ends_at' => null,
             ]);
 
         foreach (range(1, 15) as $i) {
@@ -137,9 +138,9 @@ class DunningNotificationsTest extends TestCase
         Notification::assertSentTo($user, DunningEmailToCoverAccountUsageNotification::class);
 
         $this->assertDatabaseHas('dunnings', [
-            'user_id'  => $user->id,
+            'user_id' => $user->id,
             'sequence' => 1,
-            'type'     => 'limit_usage_in_new_accounts',
+            'type' => 'limit_usage_in_new_accounts',
         ]);
     }
 
@@ -150,7 +151,7 @@ class DunningNotificationsTest extends TestCase
     {
         $user = User::factory()
             ->hasDunning([
-                'type'     => 'limit_usage_in_new_accounts',
+                'type' => 'limit_usage_in_new_accounts',
             ])
             ->create();
 
@@ -184,7 +185,7 @@ class DunningNotificationsTest extends TestCase
     {
         $dunning = Dunning::factory()
             ->createOneQuietly([
-                'type'     => 'limit_usage_in_new_accounts',
+                'type' => 'limit_usage_in_new_accounts',
                 'sequence' => 1,
             ]);
 
@@ -201,7 +202,7 @@ class DunningNotificationsTest extends TestCase
     {
         $dunning = Dunning::factory()
             ->createOneQuietly([
-                'type'     => 'limit_usage_in_new_accounts',
+                'type' => 'limit_usage_in_new_accounts',
                 'sequence' => 2,
             ]);
 
@@ -218,7 +219,7 @@ class DunningNotificationsTest extends TestCase
     {
         $dunning = Dunning::factory()
             ->createOneQuietly([
-                'type'     => 'limit_usage_in_new_accounts',
+                'type' => 'limit_usage_in_new_accounts',
                 'sequence' => 3,
             ]);
 
@@ -235,7 +236,7 @@ class DunningNotificationsTest extends TestCase
     {
         $dunning = Dunning::factory()
             ->createOneQuietly([
-                'type'     => 'usage_bigger_than_balance',
+                'type' => 'usage_bigger_than_balance',
                 'sequence' => 1,
             ]);
 
@@ -252,7 +253,7 @@ class DunningNotificationsTest extends TestCase
     {
         $dunning = Dunning::factory()
             ->createOneQuietly([
-                'type'     => 'usage_bigger_than_balance',
+                'type' => 'usage_bigger_than_balance',
                 'sequence' => 2,
             ]);
 
@@ -269,7 +270,7 @@ class DunningNotificationsTest extends TestCase
     {
         $dunning = Dunning::factory()
             ->createOneQuietly([
-                'type'     => 'usage_bigger_than_balance',
+                'type' => 'usage_bigger_than_balance',
                 'sequence' => 3,
             ]);
 

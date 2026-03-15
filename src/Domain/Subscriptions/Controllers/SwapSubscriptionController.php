@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Subscriptions\Controllers;
 
 use Illuminate\Http\JsonResponse;
@@ -12,7 +13,7 @@ class SwapSubscriptionController extends Controller
     ): JsonResponse {
         if (is_demo_account()) {
             return response()->json([
-                'type'    => 'success',
+                'type' => 'success',
                 'message' => 'Subscription was swapped successfully',
             ]);
         }

@@ -1,11 +1,12 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Miscellaneous\Stripe\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use VueFileManager\Subscription\Support\Services\StripeHttpClient;
 use VueFileManager\Subscription\Domain\CreditCards\Models\CreditCard;
+use VueFileManager\Subscription\Support\Services\StripeHttpClient;
 
 class DeleteStripeCreditCardController extends Controller
 {
@@ -16,7 +17,7 @@ class DeleteStripeCreditCardController extends Controller
         CreditCard $creditCard,
     ): JsonResponse {
         $message = [
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Your credit card was successfully deleted',
         ];
 

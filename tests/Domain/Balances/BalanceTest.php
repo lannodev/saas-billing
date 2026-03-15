@@ -1,10 +1,11 @@
 <?php
+
 namespace Tests\Domain\Balances;
 
-use Tests\TestCase;
-use Tests\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Notification;
+use Tests\Models\User;
+use Tests\TestCase;
 use VueFileManager\Subscription\Domain\Credits\Exceptions\InsufficientBalanceException;
 use VueFileManager\Subscription\Domain\Credits\Notifications\BonusCreditAddedNotification;
 use VueFileManager\Subscription\Domain\Credits\Notifications\InsufficientBalanceNotification;
@@ -13,7 +14,7 @@ class BalanceTest extends TestCase
 {
     public Model $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +34,7 @@ class BalanceTest extends TestCase
 
         $this->user->balance()->create([
             'currency' => 'USD',
-            'amount'   => 50.00,
+            'amount' => 50.00,
         ]);
 
         $this
@@ -45,16 +46,16 @@ class BalanceTest extends TestCase
 
         $this
             ->assertDatabaseHas('transactions', [
-                'user_id'  => $this->user->id,
-                'amount'   => 20.00,
+                'user_id' => $this->user->id,
+                'amount' => 20.00,
                 'currency' => 'USD',
-                'status'   => 'completed',
-                'type'     => 'credit',
-                'driver'   => 'system',
+                'status' => 'completed',
+                'type' => 'credit',
+                'driver' => 'system',
             ])
             ->assertDatabaseHas('balances', [
-                'user_id'  => $this->user->id,
-                'amount'   => 70.00,
+                'user_id' => $this->user->id,
+                'amount' => 70.00,
                 'currency' => 'USD',
             ]);
 
@@ -69,8 +70,8 @@ class BalanceTest extends TestCase
         $this->user->creditBalance(50.00, 'USD');
 
         $this->assertDatabaseHas('balances', [
-            'user_id'  => $this->user->id,
-            'amount'   => 50.00,
+            'user_id' => $this->user->id,
+            'amount' => 50.00,
             'currency' => 'USD',
         ]);
     }
@@ -82,14 +83,14 @@ class BalanceTest extends TestCase
     {
         $this->user->balance()->create([
             'currency' => 'USD',
-            'amount'   => 50.00,
+            'amount' => 50.00,
         ]);
 
         $this->user->creditBalance(10.49);
 
         $this->assertDatabaseHas('balances', [
             'user_id' => $this->user->id,
-            'amount'  => 60.49,
+            'amount' => 60.49,
         ]);
     }
 
@@ -100,14 +101,14 @@ class BalanceTest extends TestCase
     {
         $this->user->balance()->create([
             'currency' => 'USD',
-            'amount'   => 50.00,
+            'amount' => 50.00,
         ]);
 
         $this->user->withdrawBalance(10.49);
 
         $this->assertDatabaseHas('balances', [
             'user_id' => $this->user->id,
-            'amount'  => 39.51,
+            'amount' => 39.51,
         ]);
     }
 
@@ -120,7 +121,7 @@ class BalanceTest extends TestCase
 
         $this->user->balance()->create([
             'currency' => 'USD',
-            'amount'   => 10.00,
+            'amount' => 10.00,
         ]);
 
         $this->user->withdrawBalance(20.00);

@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -36,7 +37,7 @@ class SynchronizePlansCommand extends Command
         cache()->delete('action.synchronize-plans');
 
         // Log last synchronization time
-        Log::info('Last plan synchronization at: ' . now()->toString());
+        Log::info('Last plan synchronization at: '.now()->toString());
 
         // Show message in console
         $this->info('All your plans was synchronized, congratulations! 🥳🥳🥳');

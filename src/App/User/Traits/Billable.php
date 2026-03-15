@@ -1,17 +1,18 @@
 <?php
+
 namespace VueFileManager\Subscription\App\User\Traits;
 
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use VueFileManager\Subscription\Domain\Credits\Models\Balance;
-use VueFileManager\Subscription\Domain\Customers\Models\Customer;
-use VueFileManager\Subscription\Domain\Credits\Traits\CreditHelpers;
-use VueFileManager\Subscription\Domain\DunningEmails\Models\Dunning;
-use VueFileManager\Subscription\Domain\CreditCards\Models\CreditCard;
-use VueFileManager\Subscription\Domain\Transactions\Models\Transaction;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use VueFileManager\Subscription\Domain\BillingAlerts\Models\BillingAlert;
-use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
+use VueFileManager\Subscription\Domain\CreditCards\Models\CreditCard;
+use VueFileManager\Subscription\Domain\Credits\Models\Balance;
+use VueFileManager\Subscription\Domain\Credits\Traits\CreditHelpers;
+use VueFileManager\Subscription\Domain\Customers\Models\Customer;
+use VueFileManager\Subscription\Domain\DunningEmails\Models\Dunning;
 use VueFileManager\Subscription\Domain\FailedPayments\Models\FailedPayment;
+use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
+use VueFileManager\Subscription\Domain\Transactions\Models\Transaction;
 
 trait Billable
 {

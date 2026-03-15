@@ -1,9 +1,10 @@
 <?php
+
 namespace Tests\Factories;
 
-use Tests\Models\User;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\Factories\UserFactory as TestbenchUserFactory;
+use Tests\Models\User;
 
 class UserFactory extends TestbenchUserFactory
 {
@@ -11,21 +12,19 @@ class UserFactory extends TestbenchUserFactory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
         return [
-            'id'   => $this->faker->uuid,
+            'id' => $this->faker->uuid,
             'role' => $this->faker->randomElement(
                 ['user', 'admin']
             ),
-            'email'             => $this->faker->unique()->safeEmail,
+            'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'password'          => bcrypt('secret'),
-            'remember_token'    => Str::random(10),
-            'created_at'        => $this->faker->dateTimeBetween(
+            'password' => bcrypt('secret'),
+            'remember_token' => Str::random(10),
+            'created_at' => $this->faker->dateTimeBetween(
                 $startDate = '-36 months',
                 $endDate = 'now',
                 $timezone = null

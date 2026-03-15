@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Plans\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -19,13 +20,13 @@ class StorePlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type'        => 'required|string',
-            'name'        => 'required|string',
-            'amount'      => 'sometimes|numeric',
-            'interval'    => 'sometimes|string',
+            'type' => 'required|string',
+            'name' => 'required|string',
+            'amount' => 'sometimes|numeric',
+            'interval' => 'sometimes|string',
             'description' => 'sometimes|string|nullable',
-            'currency'    => 'required|string',
-            'meters'      => 'sometimes|array',
+            'currency' => 'required|string',
+            'meters' => 'sometimes|array',
         ];
     }
 }

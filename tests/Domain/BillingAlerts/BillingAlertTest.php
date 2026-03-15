@@ -1,8 +1,9 @@
 <?php
+
 namespace Tests\Domain\BillingAlerts;
 
-use Tests\TestCase;
 use Tests\Models\User;
+use Tests\TestCase;
 
 class BillingAlertTest extends TestCase
 {
@@ -22,7 +23,7 @@ class BillingAlertTest extends TestCase
 
         $this->assertDatabaseHas('billing_alerts', [
             'user_id' => $user->id,
-            'amount'  => 30,
+            'amount' => 30,
         ]);
     }
 
@@ -46,7 +47,7 @@ class BillingAlertTest extends TestCase
 
         $this->assertDatabaseHas('billing_alerts', [
             'user_id' => $user->id,
-            'amount'  => 30,
+            'amount' => 30,
         ]);
     }
 

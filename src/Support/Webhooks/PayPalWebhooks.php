@@ -1,15 +1,16 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Webhooks;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use VueFileManager\Subscription\Support\EngineManager;
 use VueFileManager\Subscription\Domain\Plans\Models\PlanDriver;
-use VueFileManager\Subscription\Support\Events\SubscriptionWasCreated;
-use VueFileManager\Subscription\Support\Events\SubscriptionWasUpdated;
-use VueFileManager\Subscription\Support\Events\SubscriptionWasCancelled;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\SubscriptionDriver;
+use VueFileManager\Subscription\Support\EngineManager;
+use VueFileManager\Subscription\Support\Events\SubscriptionWasCancelled;
+use VueFileManager\Subscription\Support\Events\SubscriptionWasCreated;
+use VueFileManager\Subscription\Support\Events\SubscriptionWasUpdated;
 
 trait PayPalWebhooks
 {
@@ -26,18 +27,18 @@ trait PayPalWebhooks
 
         // Store new subscription
         $subscription = Subscription::create([
-            'status'  => 'inactive',
-            'type'    => 'fixed',
+            'status' => 'inactive',
+            'type' => 'fixed',
             'plan_id' => $planDriver->plan->id,
             'user_id' => $userId,
-            'name'    => $planDriver->plan->name,
+            'name' => $planDriver->plan->name,
         ]);
 
         // Store subscription pivot to gateway
         $subscription
             ->driver()
             ->create([
-                'driver'                 => 'paypal',
+                'driver' => 'paypal',
                 'driver_subscription_id' => $subscriptionCode,
             ]);
     }
@@ -86,7 +87,7 @@ trait PayPalWebhooks
 
         if ($subscriptionDriver->subscription->active()) {
             $subscriptionDriver->subscription->update([
-                'name'    => $planDriver->plan->name,
+                'name' => $planDriver->plan->name,
                 'plan_id' => $planDriver->plan->id,
             ]);
 
@@ -106,7 +107,7 @@ trait PayPalWebhooks
 
         if ($driver->subscription->active()) {
             $driver->subscription->update([
-                'status'  => 'cancelled',
+                'status' => 'cancelled',
                 'ends_at' => $endsAt,
             ]);
 
@@ -145,13 +146,13 @@ trait PayPalWebhooks
 
         // Store transaction
         $user->transactions()->create([
-            'status'    => 'completed',
-            'type'      => 'charge',
-            'driver'    => 'paypal',
-            'note'      => $subscription->plan->name,
+            'status' => 'completed',
+            'type' => 'charge',
+            'driver' => 'paypal',
+            'note' => $subscription->plan->name,
             'reference' => $request->input('resource.billing_agreement_id'),
-            'currency'  => $request->input('resource.amount.currency'),
-            'amount'    => $request->input('resource.amount.total'),
+            'currency' => $request->input('resource.amount.currency'),
+            'amount' => $request->input('resource.amount.total'),
         ]);
     }
 
@@ -172,13 +173,13 @@ trait PayPalWebhooks
 
         // Store transaction
         $user->transactions()->create([
-            'status'    => 'completed',
-            'type'      => 'charge',
-            'driver'    => 'paypal',
-            'note'      => 'Account Fund',
+            'status' => 'completed',
+            'type' => 'charge',
+            'driver' => 'paypal',
+            'note' => 'Account Fund',
             'reference' => $request->input('resource.id'),
-            'currency'  => $request->input('resource.purchase_units.0.amount.currency_code'),
-            'amount'    => $request->input('resource.purchase_units.0.amount.value'),
+            'currency' => $request->input('resource.purchase_units.0.amount.currency_code'),
+            'amount' => $request->input('resource.purchase_units.0.amount.value'),
         ]);
 
         // Remove dunning warning

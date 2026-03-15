@@ -1,25 +1,26 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Engines;
 
-use Exception;
 use ErrorException;
-use Illuminate\Support\Str;
+use Exception;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Client\Response;
-use VueFileManager\Subscription\Domain\Plans\Models\Plan;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use VueFileManager\Subscription\Domain\Customers\Models\Customer;
-use VueFileManager\Subscription\Support\Webhooks\PayStackWebhooks;
-use VueFileManager\Subscription\Support\Services\PayStackHttpClient;
 use VueFileManager\Subscription\Domain\Plans\DTO\CreateFixedPlanData;
+use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
-use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
+use VueFileManager\Subscription\Support\Services\PayStackHttpClient;
+use VueFileManager\Subscription\Support\Webhooks\PayStackWebhooks;
 
 class PayStackEngine implements Engine
 {
-    use PayStackWebhooks;
     use PayStackHttpClient;
+    use PayStackWebhooks;
 
     /**
      * https://paystack.com/docs/api/#plan-create
@@ -34,9 +35,9 @@ class PayStackEngine implements Engine
             : $data->currency;
 
         $response = $this->post('/plan', [
-            'name'     => $data->name,
+            'name' => $data->name,
             'currency' => $currency,
-            'amount'   => $data->amount * 100,
+            'amount' => $data->amount * 100,
             'interval' => mapPaystackIntervals($data->interval),
         ]);
 
@@ -46,7 +47,7 @@ class PayStackEngine implements Engine
         }
 
         return [
-            'id'   => $response->json()['data']['plan_code'],
+            'id' => $response->json()['data']['plan_code'],
             'name' => $response->json()['data']['name'],
         ];
     }
@@ -92,17 +93,17 @@ class PayStackEngine implements Engine
     public function createCustomer(array $user): Response
     {
         $response = $this->post('/customer', [
-            'email'      => $user['email'],
+            'email' => $user['email'],
             'first_name' => $user['name'],
-            'last_name'  => $user['surname'],
-            'phone'      => $user['phone'],
+            'last_name' => $user['surname'],
+            'phone' => $user['phone'],
         ]);
 
         // Store customer id to the database
         Customer::create([
-            'user_id'        => $user['id'],
+            'user_id' => $user['id'],
             'driver_user_id' => $response->json()['data']['customer_code'],
-            'driver'         => 'paystack',
+            'driver' => 'paystack',
         ]);
 
         return $response;
@@ -117,10 +118,10 @@ class PayStackEngine implements Engine
         $user = config('auth.providers.users.model')::find($user['id']);
 
         return $this->put("/customer/{$user->customerId('paystack')}", [
-            'email'      => $user['email'],
+            'email' => $user['email'],
             'first_name' => $user['name'],
-            'last_name'  => $user['surname'],
-            'phone'      => $user['phone'],
+            'last_name' => $user['surname'],
+            'phone' => $user['phone'],
         ]);
     }
 
@@ -148,7 +149,7 @@ class PayStackEngine implements Engine
 
         return [
             'driver' => 'paystack',
-            'url'    => $response->json()['data']['link'],
+            'url' => $response->json()['data']['link'],
         ];
     }
 
@@ -162,17 +163,17 @@ class PayStackEngine implements Engine
 
         // Send cancel subscription request
         $response = $this->post('/subscription/disable', [
-            'code'  => $subscriptionDetail->json()['data']['subscription_code'],
+            'code' => $subscriptionDetail->json()['data']['subscription_code'],
             'token' => $subscriptionDetail->json()['data']['email_token'],
         ]);
 
         if (! $response->json()['status']) {
-            //TODO: create exception
+            // TODO: create exception
         }
 
         // Store end_at period and update status as cancelled
         $subscription->update([
-            'status'  => 'cancelled',
+            'status' => 'cancelled',
             'ends_at' => $subscriptionDetail->json()['data']['next_payment_date'],
         ]);
 
@@ -181,6 +182,7 @@ class PayStackEngine implements Engine
 
     /**
      * https://paystack.com/docs/payments/webhooks
+     *
      * @throws Exception
      */
     public function webhook(Request $request): \Symfony\Component\HttpFoundation\Response
@@ -196,7 +198,7 @@ class PayStackEngine implements Engine
         }
 
         // Extract method name
-        $method = 'handle' . Str::studly(str_replace('.', '_', $request->input('event')));
+        $method = 'handle'.Str::studly(str_replace('.', '_', $request->input('event')));
 
         if (method_exists($this, $method)) {
             $this->{$method}($request);
@@ -205,9 +207,7 @@ class PayStackEngine implements Engine
         return new \Symfony\Component\HttpFoundation\Response('Webhook Handled', 200);
     }
 
-    public function swapSubscription(Subscription $subscription, Plan $plan): Response
-    {
-    }
+    public function swapSubscription(Subscription $subscription, Plan $plan): Response {}
 
     public function createSubscription(Plan $plan, $user = null): array
     {

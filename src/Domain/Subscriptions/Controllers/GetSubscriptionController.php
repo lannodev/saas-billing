@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Subscriptions\Controllers;
 
 use Illuminate\Http\JsonResponse;
@@ -16,7 +17,7 @@ class GetSubscriptionController
         }
 
         return response()->json([
-            'type'    => 'error',
+            'type' => 'error',
             'message' => 'User do not have subscription',
         ], 404);
     }

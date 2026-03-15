@@ -13,9 +13,9 @@ class SubscriptionDriverFactory extends Factory
     public function definition(): array
     {
         return [
-            'subscription_id'        => $this->faker->uuid,
+            'subscription_id' => $this->faker->uuid,
             'driver_subscription_id' => Str::random(),
-            'driver'                 => $this->faker->randomElement(['paypal', 'paystack', 'stripe']),
+            'driver' => $this->faker->randomElement(['paypal', 'paystack', 'stripe']),
         ];
     }
 }

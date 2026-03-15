@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Domain\CreditCards;
 
 use Tests\TestCase;
@@ -9,7 +10,7 @@ class CreditCardTest extends TestCase
     /**
      * @test
      */
-    public function it_check_correctness_of_isBeforeExpiration_and_isExpired_attributes()
+    public function it_check_correctness_of_is_before_expiration_and_is_expired_attributes()
     {
         $isBeforeExpiration = CreditCard::factory()
             ->create([

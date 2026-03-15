@@ -1,23 +1,24 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Engines;
 
 use ErrorException;
-use Illuminate\Support\Str;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Client\Response;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
+use VueFileManager\Subscription\Domain\Plans\DTO\CreateFixedPlanData;
 use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Plans\Models\PlanDriver;
-use VueFileManager\Subscription\Support\Webhooks\PayPalWebhooks;
-use VueFileManager\Subscription\Support\Services\PayPalHttpClient;
-use VueFileManager\Subscription\Domain\Plans\DTO\CreateFixedPlanData;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
-use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
+use VueFileManager\Subscription\Support\Services\PayPalHttpClient;
+use VueFileManager\Subscription\Support\Webhooks\PayPalWebhooks;
 
 class PayPalEngine implements Engine
 {
-    use PayPalWebhooks;
     use PayPalHttpClient;
+    use PayPalWebhooks;
 
     /**
      * https://developer.paypal.com/docs/api/subscriptions/v1/#plans_create
@@ -29,28 +30,28 @@ class PayPalEngine implements Engine
         $productId = $this->getOrCreateProductId();
 
         $plan = $this->post('/billing/plans', [
-            'product_id'          => $productId,
-            'name'                => $data->name,
-            'description'         => $data->description,
-            'billing_cycles'      => [
+            'product_id' => $productId,
+            'name' => $data->name,
+            'description' => $data->description,
+            'billing_cycles' => [
                 [
-                    'frequency'      => [
-                        'interval_unit'  => mapPayPalInterval($data->interval),
+                    'frequency' => [
+                        'interval_unit' => mapPayPalInterval($data->interval),
                         'interval_count' => 1,
                     ],
-                    'tenure_type'    => 'REGULAR',
-                    'sequence'       => 1,
-                    'total_cycles'   => 0,
+                    'tenure_type' => 'REGULAR',
+                    'sequence' => 1,
+                    'total_cycles' => 0,
                     'pricing_scheme' => [
                         'fixed_price' => [
-                            'value'         => $data->amount,
+                            'value' => $data->amount,
                             'currency_code' => $data->currency,
                         ],
                     ],
                 ],
             ],
             'payment_preferences' => [
-                'auto_bill_outstanding'     => true,
+                'auto_bill_outstanding' => true,
                 'payment_failure_threshold' => 3,
             ],
         ]);
@@ -61,7 +62,7 @@ class PayPalEngine implements Engine
         }
 
         return [
-            'id'   => $plan->json()['id'],
+            'id' => $plan->json()['id'],
             'name' => $plan->json()['name'],
         ];
     }
@@ -73,13 +74,13 @@ class PayPalEngine implements Engine
     {
         $response = $this->patch("/billing/plans/{$plan->driverId('paypal')}", [
             [
-                'op'    => 'replace',
-                'path'  => '/name',
+                'op' => 'replace',
+                'path' => '/name',
                 'value' => $plan->name,
             ],
             [
-                'op'    => 'replace',
-                'path'  => '/description',
+                'op' => 'replace',
+                'path' => '/description',
                 'value' => $plan->description,
             ],
         ]);
@@ -117,7 +118,7 @@ class PayPalEngine implements Engine
     public function swapSubscription(Subscription $subscription, Plan $plan): Response
     {
         return $this->post("/billing/subscriptions/{$subscription->driverId()}/revise", [
-            'plan_id'             => $plan->driverId('paypal'),
+            'plan_id' => $plan->driverId('paypal'),
             'application_context' => [
                 'url' => url('/user/settings/billing'),
             ],
@@ -130,7 +131,7 @@ class PayPalEngine implements Engine
     public function updateSubscription(Subscription $subscription, ?Plan $plan = null): array
     {
         $response = $this->post("/billing/subscriptions/{$subscription->driverId()}/revise", [
-            'plan_id'             => $plan->driverId('paypal'),
+            'plan_id' => $plan->driverId('paypal'),
             'application_context' => [
                 'return_url' => url('/user/settings/billing'),
             ],
@@ -138,7 +139,7 @@ class PayPalEngine implements Engine
 
         return [
             'driver' => 'paypal',
-            'url'    => $response->json()['links'][0]['href'],
+            'url' => $response->json()['links'][0]['href'],
         ];
     }
 
@@ -157,7 +158,7 @@ class PayPalEngine implements Engine
 
         // Store end_at period and update status as cancelled
         $subscription->update([
-            'status'  => 'cancelled',
+            'status' => 'cancelled',
             'ends_at' => $originalSubscription->json()['billing_info']['next_billing_time'],
         ]);
 
@@ -187,7 +188,7 @@ class PayPalEngine implements Engine
         }*/
 
         // Extract method name
-        $method = 'handle' . Str::studly(str_replace('.', '_', strtolower($request->input('event_type'))));
+        $method = 'handle'.Str::studly(str_replace('.', '_', strtolower($request->input('event_type'))));
 
         if (method_exists($this, $method)) {
             $this->{$method}($request);
@@ -219,10 +220,10 @@ class PayPalEngine implements Engine
         }
 
         $response = $this->post('/catalogs/products', [
-            'name'        => 'Subscription Service',
+            'name' => 'Subscription Service',
             'description' => 'Cloud subscription service',
-            'type'        => 'SERVICE',
-            'category'    => 'SOFTWARE',
+            'type' => 'SERVICE',
+            'category' => 'SOFTWARE',
         ]);
 
         // Check if there is any error
@@ -233,12 +234,12 @@ class PayPalEngine implements Engine
         return $response->json()['id'];
     }
 
-    public function createCustomer(array $user): null|Response
+    public function createCustomer(array $user): ?Response
     {
         return null;
     }
 
-    public function updateCustomer(array $user): null|Response
+    public function updateCustomer(array $user): ?Response
     {
         return null;
     }

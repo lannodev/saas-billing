@@ -1,11 +1,12 @@
 <?php
+
 namespace Tests\App\Scheduler;
 
-use Tests\TestCase;
 use Illuminate\Support\Facades\Event;
-use VueFileManager\Subscription\Support\Events\SubscriptionWasExpired;
-use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
+use Tests\TestCase;
 use VueFileManager\Subscription\App\Scheduler\HaltExpiredSubscriptionsSchedule;
+use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
+use VueFileManager\Subscription\Support\Events\SubscriptionWasExpired;
 
 class HaltExpiredSubscriptionsTest extends TestCase
 {
@@ -21,8 +22,8 @@ class HaltExpiredSubscriptionsTest extends TestCase
         $subscription = Subscription::factory()
             ->hasDriver()
             ->create([
-                'type'    => 'fixed',
-                'status'  => 'cancelled',
+                'type' => 'fixed',
+                'status' => 'cancelled',
                 'ends_at' => now(),
             ]);
 

@@ -1,9 +1,10 @@
 <?php
+
 namespace Tests\Support\Miscellaneous\Paystack;
 
-use Tests\TestCase;
-use Tests\Models\User;
 use Illuminate\Support\Facades\Http;
+use Tests\Models\User;
+use Tests\TestCase;
 use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 
 class PaystackMiscellaneousTest extends TestCase
@@ -18,19 +19,19 @@ class PaystackMiscellaneousTest extends TestCase
 
         Plan::factory()
             ->hasDrivers([
-                'driver'         => 'paypal',
+                'driver' => 'paypal',
                 'driver_plan_id' => 'PLN_7fk2qj6z33a2pw7',
             ])
             ->create();
 
         Http::fake([
             'https://api.paystack.co/transaction/initialize' => Http::response([
-                'status'  => true,
+                'status' => true,
                 'message' => 'Authorization URL created',
-                'data'    => [
+                'data' => [
                     'authorization_url' => 'https://checkout.paystack.com/9cfwul2yhp2ghxi',
-                    'access_code'       => '9cfwul2yhp2ghxi',
-                    'reference'         => '4yazzhzp00',
+                    'access_code' => '9cfwul2yhp2ghxi',
+                    'reference' => '4yazzhzp00',
                 ],
             ]),
         ]);
@@ -44,6 +45,7 @@ class PaystackMiscellaneousTest extends TestCase
                 'authorization_url' => 'https://checkout.paystack.com/9cfwul2yhp2ghxi',
             ]);
     }
+
     /**
      * @test
      */
@@ -54,12 +56,12 @@ class PaystackMiscellaneousTest extends TestCase
 
         Http::fake([
             'https://api.paystack.co/transaction/initialize' => Http::response([
-                'status'  => true,
+                'status' => true,
                 'message' => 'Authorization URL created',
-                'data'    => [
+                'data' => [
                     'authorization_url' => 'https://checkout.paystack.com/9cfwul2yhp2ghxi',
-                    'access_code'       => '9cfwul2yhp2ghxi',
-                    'reference'         => '4yazzhzp00',
+                    'access_code' => '9cfwul2yhp2ghxi',
+                    'reference' => '4yazzhzp00',
                 ],
             ]),
         ]);

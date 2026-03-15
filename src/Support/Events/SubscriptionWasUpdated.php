@@ -1,8 +1,9 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Events;
 
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
 
 class SubscriptionWasUpdated
@@ -11,6 +12,5 @@ class SubscriptionWasUpdated
 
     public function __construct(
         public Subscription $subscription
-    ) {
-    }
+    ) {}
 }

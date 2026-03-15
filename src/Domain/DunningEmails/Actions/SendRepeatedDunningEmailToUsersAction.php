@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\DunningEmails\Actions;
 
 use VueFileManager\Subscription\Domain\DunningEmails\Models\Dunning;
@@ -7,8 +8,7 @@ class SendRepeatedDunningEmailToUsersAction
 {
     public function __construct(
         public SendDunningEmailToUserAction $sendDunningEmailToUser,
-    ) {
-    }
+    ) {}
 
     public function __invoke(): void
     {

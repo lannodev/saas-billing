@@ -1,19 +1,21 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Subscriptions\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 use Kyslik\ColumnSortable\Sortable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use VueFileManager\Subscription\Support\EngineManager;
+use VueFileManager\Subscription\Database\Factories\SubscriptionFactory;
 use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Usage\Models\Usage;
-use VueFileManager\Subscription\Database\Factories\SubscriptionFactory;
+use VueFileManager\Subscription\Support\EngineManager;
 
 /**
  * @method static create(array $array)
+ *
  * @property string id
  * @property string user_id
  * @property string plan_id
@@ -26,18 +28,18 @@ use VueFileManager\Subscription\Database\Factories\SubscriptionFactory;
  */
 class Subscription extends Model
 {
-    use Sortable;
     use HasFactory;
+    use Sortable;
 
     protected $guarded = [];
 
     protected $casts = [
-        'id'            => 'string',
-        'plan_id'       => 'string',
-        'user_id'       => 'string',
-        'ends_at'       => 'datetime',
+        'id' => 'string',
+        'plan_id' => 'string',
+        'user_id' => 'string',
+        'ends_at' => 'datetime',
         'trial_ends_at' => 'datetime',
-        'renews_at'     => 'datetime',
+        'renews_at' => 'datetime',
     ];
 
     public $incrementing = false;
@@ -118,7 +120,7 @@ class Subscription extends Model
     /**
      * Get gateway subscription id
      */
-    public function driverName(): null|string
+    public function driverName(): ?string
     {
         return $this->driver->driver ?? null;
     }
@@ -182,8 +184,8 @@ class Subscription extends Model
             ->first();
 
         $this->usages()->create([
-            'metered_feature_id'   => $meteredItem->id,
-            'quantity'             => $quantity,
+            'metered_feature_id' => $meteredItem->id,
+            'quantity' => $quantity,
         ]);
     }
 

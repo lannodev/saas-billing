@@ -1,14 +1,16 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\BillingAlerts\Models;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 /**
  * @method static create(array $array)
+ *
  * @property string id
  * @property string user_id
  * @property float amount
@@ -23,8 +25,8 @@ class BillingAlert extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'id'      => 'string',
-        'amount'  => 'float',
+        'id' => 'string',
+        'amount' => 'float',
     ];
 
     public $incrementing = false;

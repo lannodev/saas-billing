@@ -1,10 +1,11 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Engines;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Client\Response;
-use VueFileManager\Subscription\Domain\Plans\Models\Plan;
+use Illuminate\Http\Request;
 use VueFileManager\Subscription\Domain\Plans\DTO\CreateFixedPlanData;
+use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
 
 interface Engine
@@ -32,12 +33,12 @@ interface Engine
     /**
      * Create new customer for service
      */
-    public function createCustomer(array $user): null|Response;
+    public function createCustomer(array $user): ?Response;
 
     /**
      * Update customer for service
      */
-    public function updateCustomer(array $user): null|Response;
+    public function updateCustomer(array $user): ?Response;
 
     /**
      * Get Subscription details

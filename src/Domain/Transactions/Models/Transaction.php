@@ -1,16 +1,18 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Transactions\Models;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
-use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
+use Kyslik\ColumnSortable\Sortable;
 use VueFileManager\Subscription\Database\Factories\TransactionFactory;
 
 /**
  * @method static create(array $array)
+ *
  * @property string id
  * @property string user_id
  * @property string note
@@ -31,8 +33,8 @@ class Transaction extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'id'         => 'string',
-        'metadata'   => 'array',
+        'id' => 'string',
+        'metadata' => 'array',
         'created_at' => 'datetime',
     ];
 

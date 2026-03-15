@@ -1,16 +1,18 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\DunningEmails\Models;
 
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use VueFileManager\Subscription\Database\Factories\DunningFactory;
 use VueFileManager\Subscription\Domain\DunningEmails\Actions\SendDunningEmailToUserAction;
 
 /**
  * @method static create(array $array)
  * @method static where(string $key, string $value)
+ *
  * @property string id
  * @property string user_id
  * @property int sequence

@@ -1,8 +1,9 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Credits\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class CreditUserBalanceController extends Controller
@@ -10,7 +11,7 @@ class CreditUserBalanceController extends Controller
     public function __invoke(Request $request, $id): JsonResponse
     {
         $response = [
-            'type'    => 'success',
+            'type' => 'success',
             'message' => 'User balance was successfully increased',
         ];
 
@@ -26,12 +27,12 @@ class CreditUserBalanceController extends Controller
 
         // Store transaction
         $user->transactions()->create([
-            'status'   => 'completed',
-            'type'     => 'credit',
-            'driver'   => 'system',
-            'note'     => __('Bonus'),
+            'status' => 'completed',
+            'type' => 'credit',
+            'driver' => 'system',
+            'note' => __('Bonus'),
             'currency' => $user->balance->currency,
-            'amount'   => $request->input('amount'),
+            'amount' => $request->input('amount'),
         ]);
 
         // Send user bonus notification

@@ -1,4 +1,5 @@
 <?php
+
 namespace VueFileManager\Subscription\Support\Miscellaneous\Paystack\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -20,7 +21,7 @@ class CreatePaystackTransactionRequest extends FormRequest
     {
         return [
             'planCode' => 'sometimes|nullable|string',
-            'amount'   => 'sometimes|nullable|integer',
+            'amount' => 'sometimes|nullable|integer',
         ];
     }
 }

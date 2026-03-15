@@ -1,10 +1,11 @@
 <?php
+
 namespace VueFileManager\Subscription\Domain\Subscriptions\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
 
 class SubscriptionWasCreatedNotification extends Notification implements ShouldQueue
@@ -13,8 +14,7 @@ class SubscriptionWasCreatedNotification extends Notification implements ShouldQ
 
     public function __construct(
         public Subscription $subscription,
-    ) {
-    }
+    ) {}
 
     public function via(): array
     {

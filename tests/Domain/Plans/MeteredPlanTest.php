@@ -1,8 +1,9 @@
 <?php
+
 namespace Tests\Domain\Plans;
 
-use Tests\TestCase;
 use Tests\Models\User;
+use Tests\TestCase;
 
 class MeteredPlanTest extends TestCase
 {
@@ -17,32 +18,32 @@ class MeteredPlanTest extends TestCase
         $this
             ->actingAs($user)
             ->post('/api/subscriptions/admin/plans', [
-                'type'        => 'metered',
-                'name'        => 'Basic Plan',
+                'type' => 'metered',
+                'name' => 'Basic Plan',
                 'description' => 'Pay as you go is the best fit',
-                'currency'    => 'USD',
-                'meters'      => [
+                'currency' => 'USD',
+                'meters' => [
                     [
-                        'key'                => 'bandwidth',
+                        'key' => 'bandwidth',
                         'aggregate_strategy' => 'sum_of_usage',
-                        'tiers'              => [
+                        'tiers' => [
                             [
                                 'first_unit' => 1,
-                                'last_unit'  => null,
-                                'per_unit'   => 0.019,
-                                'flat_fee'   => 2.49,
+                                'last_unit' => null,
+                                'per_unit' => 0.019,
+                                'flat_fee' => 2.49,
                             ],
                         ],
                     ],
                     [
-                        'key'                => 'storage',
+                        'key' => 'storage',
                         'aggregate_strategy' => 'maximum_usage',
-                        'tiers'              => [
+                        'tiers' => [
                             [
                                 'first_unit' => 1,
-                                'last_unit'  => null,
-                                'per_unit'   => 0.09,
-                                'flat_fee'   => null,
+                                'last_unit' => null,
+                                'per_unit' => 0.09,
+                                'flat_fee' => null,
                             ],
                         ],
                     ],
@@ -56,31 +57,31 @@ class MeteredPlanTest extends TestCase
 
         $this
             ->assertDatabaseHas('plans', [
-                'type'        => 'metered',
-                'name'        => 'Basic Plan',
+                'type' => 'metered',
+                'name' => 'Basic Plan',
                 'description' => 'Pay as you go is the best fit',
-                'currency'    => 'USD',
-                'status'      => 'active',
+                'currency' => 'USD',
+                'status' => 'active',
             ])
             ->assertDatabaseHas('plan_metered_features', [
-                'key'                => 'bandwidth',
+                'key' => 'bandwidth',
                 'aggregate_strategy' => 'sum_of_usage',
             ])
             ->assertDatabaseHas('plan_metered_features', [
-                'key'                => 'storage',
+                'key' => 'storage',
                 'aggregate_strategy' => 'maximum_usage',
             ])
             ->assertDatabaseHas('metered_tiers', [
                 'first_unit' => 1,
-                'last_unit'  => null,
-                'per_unit'   => 0.019,
-                'flat_fee'   => 2.49,
+                'last_unit' => null,
+                'per_unit' => 0.019,
+                'flat_fee' => 2.49,
             ])
             ->assertDatabaseHas('metered_tiers', [
                 'first_unit' => 1,
-                'last_unit'  => null,
-                'per_unit'   => 0.09,
-                'flat_fee'   => null,
+                'last_unit' => null,
+                'per_unit' => 0.09,
+                'flat_fee' => null,
             ]);
     }
 }

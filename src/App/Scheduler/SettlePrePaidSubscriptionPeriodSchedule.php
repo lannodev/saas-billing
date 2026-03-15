@@ -1,20 +1,20 @@
 <?php
+
 namespace VueFileManager\Subscription\App\Scheduler;
 
 use Illuminate\Support\Collection;
+use VueFileManager\Subscription\Domain\Credits\Exceptions\InsufficientBalanceException;
 use VueFileManager\Subscription\Domain\Subscriptions\Models\Subscription;
 use VueFileManager\Subscription\Domain\Usage\Actions\SumUsageForCurrentPeriodAction;
-use VueFileManager\Subscription\Domain\Credits\Exceptions\InsufficientBalanceException;
-use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Exceptions\ChargeFailedException;
 use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Actions\ChargeFromSavedPaymentMethodAction;
+use VueFileManager\Subscription\Support\Miscellaneous\Stripe\Exceptions\ChargeFailedException;
 
 class SettlePrePaidSubscriptionPeriodSchedule
 {
     public function __construct(
         public SumUsageForCurrentPeriodAction $sumUsageForCurrentPeriod,
         public ChargeFromSavedPaymentMethodAction $chargeFromSavedPaymentMethod,
-    ) {
-    }
+    ) {}
 
     public function __invoke()
     {
@@ -77,38 +77,38 @@ class SettlePrePaidSubscriptionPeriodSchedule
                 // Create transaction
                 $subscription->user->transactions()->create([
                     'reference' => $charge['charges']['data'][0]['id'],
-                    'type'      => 'charge',
-                    'status'    => 'completed',
-                    'note'      => get_metered_charge_period(),
-                    'currency'  => $subscription->plan->currency,
-                    'amount'    => $chargeAmount,
-                    'driver'    => 'stripe',
-                    'metadata'  => $usageEstimates,
+                    'type' => 'charge',
+                    'status' => 'completed',
+                    'note' => get_metered_charge_period(),
+                    'currency' => $subscription->plan->currency,
+                    'amount' => $chargeAmount,
+                    'driver' => 'stripe',
+                    'metadata' => $usageEstimates,
                 ]);
             } catch (ChargeFailedException $e) {
                 // Get notification
                 $ChargeFromCreditCardFailedNotification = config('subscription.notifications.ChargeFromCreditCardFailedNotification');
 
                 // Notify user
-                $subscription->user->notify(new $ChargeFromCreditCardFailedNotification());
+                $subscription->user->notify(new $ChargeFromCreditCardFailedNotification);
 
                 // Create transaction
                 $subscription->user->transactions()->create([
                     'reference' => null,
-                    'type'      => 'charge',
-                    'status'    => 'error',
-                    'note'      => get_metered_charge_period(),
-                    'currency'  => $subscription->plan->currency,
-                    'amount'    => $chargeAmount,
-                    'driver'    => 'stripe',
+                    'type' => 'charge',
+                    'status' => 'error',
+                    'note' => get_metered_charge_period(),
+                    'currency' => $subscription->plan->currency,
+                    'amount' => $chargeAmount,
+                    'driver' => 'stripe',
                 ]);
 
                 // Store failed payment record
                 $subscription->user->failedPayments()->create([
                     'currency' => $subscription->plan->currency,
-                    'amount'   => $chargeAmount,
-                    'source'   => 'credit-card',
-                    'note'     => get_metered_charge_period(),
+                    'amount' => $chargeAmount,
+                    'source' => 'credit-card',
+                    'note' => get_metered_charge_period(),
                     'metadata' => $usageEstimates,
                 ]);
             }
@@ -129,12 +129,12 @@ class SettlePrePaidSubscriptionPeriodSchedule
 
             // Create transaction
             $subscription->user->transactions()->create([
-                'type'     => 'withdrawal',
-                'status'   => 'completed',
+                'type' => 'withdrawal',
+                'status' => 'completed',
                 'currency' => $subscription->plan->currency,
-                'amount'   => $chargeAmount,
-                'driver'   => 'system',
-                'note'     => get_metered_charge_period(),
+                'amount' => $chargeAmount,
+                'driver' => 'system',
+                'note' => get_metered_charge_period(),
                 'metadata' => $usageEstimates,
             ]);
         } catch (InsufficientBalanceException $e) {
@@ -142,24 +142,24 @@ class SettlePrePaidSubscriptionPeriodSchedule
             $InsufficientBalanceNotification = config('subscription.notifications.InsufficientBalanceNotification');
 
             // Notify user
-            $subscription->user->notify(new $InsufficientBalanceNotification());
+            $subscription->user->notify(new $InsufficientBalanceNotification);
 
             // Create error transaction
             $subscription->user->transactions()->create([
-                'type'     => 'withdrawal',
-                'status'   => 'error',
+                'type' => 'withdrawal',
+                'status' => 'error',
                 'currency' => $subscription->plan->currency,
-                'amount'   => $chargeAmount,
-                'driver'   => 'system',
-                'note'     => get_metered_charge_period(),
+                'amount' => $chargeAmount,
+                'driver' => 'system',
+                'note' => get_metered_charge_period(),
             ]);
 
             // Store failed payment record
             $subscription->user->failedPayments()->create([
                 'currency' => $subscription->plan->currency,
-                'amount'   => $chargeAmount,
-                'source'   => 'balance',
-                'note'     => get_metered_charge_period(),
+                'amount' => $chargeAmount,
+                'source' => 'balance',
+                'note' => get_metered_charge_period(),
                 'metadata' => $usageEstimates,
             ]);
         }
