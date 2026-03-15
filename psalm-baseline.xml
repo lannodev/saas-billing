@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.15.1@28dc127af1b5aecd52314f6f645bafc10d0e11f9">
+  <file src="src/App/Console/Commands/SynchronizePlansCommand.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[handle]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/App/Scheduler/CheckAndTriggerBillingAlertsSchedule.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/App/Scheduler/SettlePrePaidSubscriptionPeriodSchedule.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/BillingAlerts/Controllers/BillingAlertController.php">
+    <UnusedClass>
+      <code><![CDATA[BillingAlertController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/BillingAlerts/Models/BillingAlert.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected static function boot()]]></code>
+    </MissingOverrideAttribute>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[user]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/BillingAlerts/Notifications/BillingAlertTriggeredNotification.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[toMail]]></code>
+      <code><![CDATA[via]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/BillingAlerts/Requests/StoreBillingAlertRequest.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[authorize]]></code>
+      <code><![CDATA[rules]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/BillingAlerts/Requests/UpdateBillingAlertRequest.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[authorize]]></code>
+      <code><![CDATA[rules]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/BillingAlerts/Resources/BillingAlertResource.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[BillingAlertResource]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/CreditCards/Models/CreditCard.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected static function boot()]]></code>
+    </MissingOverrideAttribute>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getIsBeforeExpirationAttribute]]></code>
+      <code><![CDATA[getIsExpiredAttribute]]></code>
+      <code><![CDATA[user]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/CreditCards/Resources/CreditCardCollection.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[CreditCardCollection]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/CreditCards/Resources/CreditCardResource.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Domain/Credits/Controllers/CreditUserBalanceController.php">
+    <UnusedClass>
+      <code><![CDATA[CreditUserBalanceController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Credits/Exceptions/InsufficientBalanceException.php">
+    <UnusedClass>
+      <code><![CDATA[InsufficientBalanceException]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Credits/Models/Balance.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected static function boot()]]></code>
+    </MissingOverrideAttribute>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[user]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Credits/Notifications/BonusCreditAddedNotification.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[toMail]]></code>
+      <code><![CDATA[via]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Credits/Notifications/InsufficientBalanceNotification.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[toMail]]></code>
+      <code><![CDATA[via]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Credits/Resources/BalanceResource.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[BalanceResource]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Customers/Models/Customer.php">
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[user]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DunningEmails/Actions/SendRepeatedDunningEmailToUsersAction.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DunningEmails/Models/Dunning.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected static function boot()]]></code>
+    </MissingOverrideAttribute>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[user]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/DunningEmails/Notifications/DunningEmailToCoverAccountUsageNotification.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[toMail]]></code>
+      <code><![CDATA[via]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/FailedPayments/Actions/RetryChargeFromPaymentCardAction.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/FailedPayments/Actions/RetryWithdrawnFromBalanceAction.php">
+    <UnusedClass>
+      <code><![CDATA[RetryWithdrawnFromBalanceAction]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/FailedPayments/Models/FailedPayment.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected static function boot()]]></code>
+    </MissingOverrideAttribute>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[user]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/FailedPayments/Notifications/ChargeFromCreditCardFailedAgainNotification.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[toMail]]></code>
+      <code><![CDATA[via]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/FailedPayments/Notifications/ChargeFromCreditCardFailedNotification.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[toMail]]></code>
+      <code><![CDATA[via]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/FailedPayments/Resources/FailedPaymentResource.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Domain/FailedPayments/Resources/FailedPaymentsCollection.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[FailedPaymentsCollection]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Plans/Actions/DeletePlansFromPaymentServiceAction.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Plans/Actions/StoreFixedPlanAction.php">
+    <InvalidStaticInvocation>
+      <code><![CDATA[Plan::create([
+            'type' => 'fixed',
+            'name' => $data->name,
+            'description' => $data->description,
+            'interval' => $data->interval,
+            'amount' => $data->amount,
+            'currency' => $data->currency,
+        ])]]></code>
+    </InvalidStaticInvocation>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Plans/Actions/StoreMeteredPlanAction.php">
+    <InvalidStaticInvocation>
+      <code><![CDATA[Plan::create([
+            'type' => 'metered',
+            'name' => $meteredPlanData->name,
+            'description' => $meteredPlanData->description,
+            'currency' => $meteredPlanData->currency,
+        ])]]></code>
+    </InvalidStaticInvocation>
+  </file>
+  <file src="src/Domain/Plans/Actions/SynchronizePlansAction.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Plans/Actions/UpdatePlanFixedItemAction.php">
+    <UnusedClass>
+      <code><![CDATA[UpdatePlanFixedItemAction]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Plans/Controllers/GetPlanSubscribersController.php">
+    <UnusedClass>
+      <code><![CDATA[GetPlanSubscribersController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Plans/Controllers/GetPlansController.php">
+    <UnusedClass>
+      <code><![CDATA[GetPlansController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Plans/Controllers/PlansController.php">
+    <UnusedClass>
+      <code><![CDATA[PlansController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Plans/Controllers/SynchronizePlansController.php">
+    <UnusedClass>
+      <code><![CDATA[SynchronizePlansController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Plans/DTO/CreateFixedPlanData.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$type]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/Plans/DTO/CreateMeteredPlanData.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[fromArray]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$type]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Domain/Plans/Exceptions/MeteredBillingPlanDoesntExist.php">
+    <UnusedClass>
+      <code><![CDATA[MeteredBillingPlanDoesntExist]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Plans/Models/MeteredTier.php">
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Plans/Models/Plan.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected static function boot()]]></code>
+    </MissingOverrideAttribute>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Plans/Models/PlanDriver.php">
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[plan]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Plans/Models/PlanFixedFeature.php">
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Domain/Plans/Models/PlanMeteredFeature.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected static function boot()]]></code>
+    </MissingOverrideAttribute>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[tiers]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Plans/Requests/StorePlanRequest.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[authorize]]></code>
+      <code><![CDATA[rules]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Plans/Requests/UpdatePlanRequest.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[authorize]]></code>
+      <code><![CDATA[rules]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Plans/Resources/PlanCollection.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Domain/Plans/Resources/PlanResource.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+    <UnhandledMatchCondition>
+      <code><![CDATA[$this->type]]></code>
+    </UnhandledMatchCondition>
+  </file>
+  <file src="src/Domain/Subscriptions/Controllers/CancelSubscriptionController.php">
+    <UnusedClass>
+      <code><![CDATA[CancelSubscriptionController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Subscriptions/Controllers/EditSubscriptionController.php">
+    <UnusedClass>
+      <code><![CDATA[EditSubscriptionController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Subscriptions/Controllers/GetAllSubscriptionsController.php">
+    <UnusedClass>
+      <code><![CDATA[GetAllSubscriptionsController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Subscriptions/Controllers/GetSubscriptionController.php">
+    <UnusedClass>
+      <code><![CDATA[GetSubscriptionController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Subscriptions/Controllers/GetUserSubscriptionController.php">
+    <UnusedClass>
+      <code><![CDATA[GetUserSubscriptionController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Subscriptions/Controllers/SwapSubscriptionController.php">
+    <UnusedClass>
+      <code><![CDATA[SwapSubscriptionController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Subscriptions/Models/Subscription.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected static function boot()]]></code>
+    </MissingOverrideAttribute>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[active]]></code>
+      <code><![CDATA[cancel]]></code>
+      <code><![CDATA[cancelled]]></code>
+      <code><![CDATA[driverName]]></code>
+      <code><![CDATA[ended]]></code>
+      <code><![CDATA[fixedFeature]]></code>
+      <code><![CDATA[fixedFeatures]]></code>
+      <code><![CDATA[onGracePeriod]]></code>
+      <code><![CDATA[plan]]></code>
+      <code><![CDATA[recordUsage]]></code>
+      <code><![CDATA[swap]]></code>
+      <code><![CDATA[user]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Subscriptions/Models/SubscriptionDriver.php">
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[subscription]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Subscriptions/Notifications/SubscriptionWasCreatedNotification.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[toMail]]></code>
+      <code><![CDATA[via]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Subscriptions/Resources/SubscriptionCollection.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Domain/Subscriptions/Resources/SubscriptionResource.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Domain/Transactions/Controllers/GetAllTransactionsController.php">
+    <UnusedClass>
+      <code><![CDATA[GetAllTransactionsController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Transactions/Controllers/GetTransactionsController.php">
+    <UnusedClass>
+      <code><![CDATA[GetTransactionsController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Transactions/Controllers/GetUserTransactionsController.php">
+    <UnusedClass>
+      <code><![CDATA[GetUserTransactionsController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Domain/Transactions/Models/Transaction.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected static function boot()]]></code>
+    </MissingOverrideAttribute>
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[user]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Transactions/Resources/TransactionCollection.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Domain/Transactions/Resources/TransactionResource.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function toArray($request)]]></code>
+    </MissingOverrideAttribute>
+    <UndefinedFunction>
+      <code><![CDATA[obfuscate_email($this->user->email)]]></code>
+    </UndefinedFunction>
+  </file>
+  <file src="src/Domain/Usage/Models/Usage.php">
+    <MissingTemplateParam>
+      <code><![CDATA[HasFactory]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[feature]]></code>
+      <code><![CDATA[subscription]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/SubscriptionServiceProvider.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function bootingPackage()]]></code>
+      <code><![CDATA[public function configurePackage(Package $package): void]]></code>
+      <code><![CDATA[public function registeringPackage()]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[SubscriptionServiceProvider]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Support/EngineManager.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getDefaultDriver(): string]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[createPayPalDriver]]></code>
+      <code><![CDATA[createPayStackDriver]]></code>
+      <code><![CDATA[createStripeDriver]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Support/Engines/Engine.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[cancelSubscription]]></code>
+      <code><![CDATA[createCustomer]]></code>
+      <code><![CDATA[createFixedPlan]]></code>
+      <code><![CDATA[createSubscription]]></code>
+      <code><![CDATA[deletePlan]]></code>
+      <code><![CDATA[swapSubscription]]></code>
+      <code><![CDATA[updateCustomer]]></code>
+      <code><![CDATA[updatePlan]]></code>
+      <code><![CDATA[updateSubscription]]></code>
+      <code><![CDATA[webhook]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Support/Engines/PayPalEngine.php">
+    <InvalidStaticInvocation>
+      <code><![CDATA[PlanDriver::where('driver', 'paypal')]]></code>
+    </InvalidStaticInvocation>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function cancelSubscription(Subscription $subscription): Response]]></code>
+      <code><![CDATA[public function createCustomer(array $user): ?Response]]></code>
+      <code><![CDATA[public function createFixedPlan(CreateFixedPlanData $data): array]]></code>
+      <code><![CDATA[public function createSubscription(Plan $plan, $user = null): array]]></code>
+      <code><![CDATA[public function deletePlan(string $planId): void]]></code>
+      <code><![CDATA[public function getPlan(string $planId): array]]></code>
+      <code><![CDATA[public function getSubscription(string $subscriptionId): Response]]></code>
+      <code><![CDATA[public function swapSubscription(Subscription $subscription, Plan $plan): Response]]></code>
+      <code><![CDATA[public function updateCustomer(array $user): ?Response]]></code>
+      <code><![CDATA[public function updatePlan(Plan $plan): Response]]></code>
+      <code><![CDATA[public function updateSubscription(Subscription $subscription, ?Plan $plan = null): array]]></code>
+      <code><![CDATA[public function webhook(Request $request): \Symfony\Component\HttpFoundation\Response]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Support/Engines/PayStackEngine.php">
+    <InvalidStaticInvocation>
+      <code><![CDATA[Customer::create([
+            'user_id' => $user['id'],
+            'driver_user_id' => $response->json()['data']['customer_code'],
+            'driver' => 'paystack',
+        ])]]></code>
+    </InvalidStaticInvocation>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function cancelSubscription(Subscription $subscription): Response]]></code>
+      <code><![CDATA[public function createCustomer(array $user): Response]]></code>
+      <code><![CDATA[public function createFixedPlan(CreateFixedPlanData $data): array]]></code>
+      <code><![CDATA[public function createSubscription(Plan $plan, $user = null): array]]></code>
+      <code><![CDATA[public function deletePlan(string $planId): void]]></code>
+      <code><![CDATA[public function getPlan(string $planId): array]]></code>
+      <code><![CDATA[public function getSubscription(string $subscriptionId): Response]]></code>
+      <code><![CDATA[public function swapSubscription(Subscription $subscription, Plan $plan): Response {}]]></code>
+      <code><![CDATA[public function updateCustomer(array $user): Response]]></code>
+      <code><![CDATA[public function updatePlan(Plan $plan): Response]]></code>
+      <code><![CDATA[public function updateSubscription(Subscription $subscription, ?Plan $plan = null): array]]></code>
+      <code><![CDATA[public function webhook(Request $request): \Symfony\Component\HttpFoundation\Response]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Support/Engines/StripeEngine.php">
+    <InvalidStaticInvocation>
+      <code><![CDATA[Customer::create([
+            'user_id' => $user['id'],
+            'driver_user_id' => $response->json()['id'],
+            'driver' => 'stripe',
+        ])]]></code>
+    </InvalidStaticInvocation>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function cancelSubscription(Subscription $subscription): Response]]></code>
+      <code><![CDATA[public function createCustomer(array $user): Response]]></code>
+      <code><![CDATA[public function createFixedPlan(CreateFixedPlanData $data): array]]></code>
+      <code><![CDATA[public function createSubscription(Plan $plan, $user = null): array]]></code>
+      <code><![CDATA[public function deletePlan(string $planId): void]]></code>
+      <code><![CDATA[public function getPlan(string $planId): array]]></code>
+      <code><![CDATA[public function getSubscription(string $subscriptionId): Response]]></code>
+      <code><![CDATA[public function swapSubscription(Subscription $subscription, Plan $plan): Response]]></code>
+      <code><![CDATA[public function updateCustomer(array $user): Response]]></code>
+      <code><![CDATA[public function updatePlan(Plan $plan): Response]]></code>
+      <code><![CDATA[public function updateSubscription(Subscription $subscription, ?Plan $plan = null): array]]></code>
+      <code><![CDATA[public function webhook(Request $request): \Symfony\Component\HttpFoundation\Response]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Support/Events/SubscriptionWasCancelled.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$subscription]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Support/Events/SubscriptionWasCreated.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$subscription]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Support/Events/SubscriptionWasExpired.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$subscription]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Support/Events/SubscriptionWasUpdated.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$subscription]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Support/Middleware/AdminCheck.php">
+    <UnusedClass>
+      <code><![CDATA[AdminCheck]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Support/Miscellaneous/Paystack/Controllers/CreatePaystackTransactionController.php">
+    <InvalidStaticInvocation>
+      <code><![CDATA[PlanDriver::where('driver_plan_id', $request->input('planCode'))]]></code>
+    </InvalidStaticInvocation>
+    <UnusedClass>
+      <code><![CDATA[CreatePaystackTransactionController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Support/Miscellaneous/Paystack/Requests/CreatePaystackTransactionRequest.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[authorize]]></code>
+      <code><![CDATA[rules]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Support/Miscellaneous/Stripe/Controllers/CreateStripeSessionController.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$request]]></code>
+    </PossiblyUnusedParam>
+    <UnusedClass>
+      <code><![CDATA[CreateStripeSessionController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Support/Miscellaneous/Stripe/Controllers/CreateStripeSetupIntentController.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$request]]></code>
+    </PossiblyUnusedParam>
+    <UnusedClass>
+      <code><![CDATA[CreateStripeSetupIntentController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Support/Miscellaneous/Stripe/Controllers/DeleteStripeCreditCardController.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$request]]></code>
+    </PossiblyUnusedParam>
+    <UnusedClass>
+      <code><![CDATA[DeleteStripeCreditCardController]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Support/Miscellaneous/Stripe/Notifications/ConfirmStripePaymentNotification.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[toMail]]></code>
+      <code><![CDATA[via]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Support/Services/PayStackHttpClient.php">
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[PromiseInterface|Response]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Support/Services/StripeHttpClient.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[patch]]></code>
+      <code><![CDATA[patch]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Support/StripeHelpers.php">
+    <UnhandledMatchCondition>
+      <code><![CDATA[$status]]></code>
+      <code><![CDATA[$strategy]]></code>
+    </UnhandledMatchCondition>
+  </file>
+  <file src="src/Support/Webhooks/PayPalWebhooks.php">
+    <InvalidStaticInvocation>
+      <code><![CDATA[PlanDriver::where('driver_plan_id', $planCode)]]></code>
+      <code><![CDATA[PlanDriver::where('driver_plan_id', $planCode)]]></code>
+      <code><![CDATA[Subscription::create([
+            'status' => 'inactive',
+            'type' => 'fixed',
+            'plan_id' => $planDriver->plan->id,
+            'user_id' => $userId,
+            'name' => $planDriver->plan->name,
+        ])]]></code>
+      <code><![CDATA[SubscriptionDriver::where('driver_subscription_id', $subscriptionCode)]]></code>
+      <code><![CDATA[SubscriptionDriver::where('driver_subscription_id', $subscriptionCode)]]></code>
+      <code><![CDATA[SubscriptionDriver::where('driver_subscription_id', $subscriptionCode)]]></code>
+      <code><![CDATA[SubscriptionDriver::where('driver_subscription_id', $subscriptionCode)]]></code>
+    </InvalidStaticInvocation>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[handleBillingSubscriptionActivated]]></code>
+      <code><![CDATA[handleBillingSubscriptionCancelled]]></code>
+      <code><![CDATA[handleBillingSubscriptionCreated]]></code>
+      <code><![CDATA[handleBillingSubscriptionUpdated]]></code>
+      <code><![CDATA[handleCheckoutOrderApproved]]></code>
+      <code><![CDATA[handlePaymentSaleCompleted]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Support/Webhooks/PayStackWebhooks.php">
+    <InvalidStaticInvocation>
+      <code><![CDATA[Customer::where('driver', 'paystack')]]></code>
+      <code><![CDATA[PlanDriver::where('driver_plan_id', $planCode)]]></code>
+      <code><![CDATA[PlanDriver::where('driver_plan_id', $request->input('data.plan.plan_code'))]]></code>
+      <code><![CDATA[Subscription::create([
+                'type' => 'fixed',
+                'plan_id' => $planDriver->plan->id,
+                'user_id' => $customer->user_id,
+                'name' => $planDriver->plan->name,
+            ])]]></code>
+      <code><![CDATA[SubscriptionDriver::where('driver_subscription_id', $subscriptionCode)]]></code>
+    </InvalidStaticInvocation>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[handleChargeSuccess]]></code>
+      <code><![CDATA[handleSubscriptionCreate]]></code>
+      <code><![CDATA[handleSubscriptionNotRenew]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Support/Webhooks/StripeWebhooks.php">
+    <InvalidStaticInvocation>
+      <code><![CDATA[Customer::where('driver', 'stripe')]]></code>
+      <code><![CDATA[Customer::where('driver_user_id', $customerCode)]]></code>
+      <code><![CDATA[Customer::where('driver_user_id', $request->input('data.object.customer'))]]></code>
+      <code><![CDATA[Customer::where('driver_user_id', $request->input('data.object.customer'))]]></code>
+      <code><![CDATA[PlanDriver::where('driver_plan_id', $planCode)]]></code>
+      <code><![CDATA[PlanDriver::where('driver_plan_id', $request->input('data.object.plan.id'))]]></code>
+      <code><![CDATA[Subscription::create([
+            'type' => 'fixed',
+            'status' => 'inactive',
+            'plan_id' => $planDriver->plan->id,
+            'user_id' => $customer->user_id,
+            'name' => $planDriver->plan->name,
+        ])]]></code>
+      <code><![CDATA[SubscriptionDriver::where('driver_subscription_id', $subscriptionCode)]]></code>
+      <code><![CDATA[SubscriptionDriver::where('driver_subscription_id', $subscriptionCode)]]></code>
+      <code><![CDATA[SubscriptionDriver::where('driver_subscription_id', $subscriptionCode)]]></code>
+    </InvalidStaticInvocation>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[handleCustomerSubscriptionCreated]]></code>
+      <code><![CDATA[handleCustomerSubscriptionDeleted]]></code>
+      <code><![CDATA[handleCustomerSubscriptionUpdated]]></code>
+      <code><![CDATA[handleInvoicePaymentActionRequired]]></code>
+      <code><![CDATA[handleInvoicePaymentSucceeded]]></code>
+      <code><![CDATA[handlePaymentIntentSucceeded]]></code>
+      <code><![CDATA[handlePaymentMethodAttached]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code><![CDATA[$request]]></code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Support/Webhooks/WebhooksController.php">
+    <UnusedClass>
+      <code><![CDATA[WebhooksController]]></code>
+    </UnusedClass>
+  </file>
+</files>
